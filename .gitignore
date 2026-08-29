@@ -1,0 +1,18 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+data/events.db
+data/events.db-wal
+data/events.db-shm
+runs/*/run.db
+runs/*/run.db-wal
+runs/*/run.db-shm
+runs/*/audit.jsonl
+.DS_Store
+
+# Deliberately NOT ignored - these are committed on purpose:
+#   runs/cache/   offline demo insurance
+#   review/       checkpoint review packets
