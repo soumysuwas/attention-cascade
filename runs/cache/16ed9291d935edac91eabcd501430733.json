@@ -1,0 +1,12 @@
+{
+  "text": "ok",
+  "model": "gemini-3.1-flash-lite",
+  "tier": "verify",
+  "input_tokens": 6,
+  "output_tokens": 1,
+  "thoughts_tokens": 0,
+  "cached_input_tokens": 0,
+  "latency_ms": 2697,
+  "cost_usd": 3e-06,
+  "long_context": false
+}

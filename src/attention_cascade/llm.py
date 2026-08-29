@@ -15,8 +15,7 @@ import json
 import random
 import time
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
-from pathlib import Path
+from datetime import UTC, datetime
 from typing import Any
 
 from . import config as C
@@ -222,7 +221,7 @@ def _record(bb: Blackboard, res: LLMResult, tier: str, run_id: str) -> None:
         output_tokens=res.output_tokens, thinking_tokens=res.thoughts_tokens,
         cached_input_tokens=res.cached_input_tokens,
         from_cache=res.from_cache, latency_ms=res.latency_ms,
-        cost_usd=res.cost_usd, ts=datetime.now(timezone.utc),
+        cost_usd=res.cost_usd, ts=datetime.now(UTC),
     ))
     bb.audit(f"llm:{tier}", "CALL", {
         "model": res.model, "in": res.input_tokens, "out": res.output_tokens,

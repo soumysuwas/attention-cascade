@@ -1,0 +1,4 @@
+$ git log --oneline -20
+(exit 0)
+
+38e77f5 scaffold: spec, checkpoints, generator, metered vertex client

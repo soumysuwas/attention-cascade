@@ -12,9 +12,10 @@ from __future__ import annotations
 import asyncio
 import json
 import sqlite3
-from datetime import datetime, timezone
+from collections.abc import Iterable
+from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any
 
 from .models import Anomaly, Candidate, Event, Hypothesis, LLMCall, Signal
 
@@ -129,7 +130,7 @@ CREATE TABLE IF NOT EXISTS run_meta (
 
 
 def _now() -> str:
-    return datetime.now(timezone.utc).isoformat()
+    return datetime.now(UTC).isoformat()
 
 
 class Blackboard:
@@ -158,13 +159,15 @@ class Blackboard:
         )
         self.conn.commit()
         with self.audit_path.open("a") as fh:
-            fh.write(json.dumps({"ts": _now(), "author": author, "kind": kind, "detail": detail}, default=str) + "\n")
+            record = {"ts": _now(), "author": author, "kind": kind, "detail": detail}
+            fh.write(json.dumps(record, default=str) + "\n")
 
     # ---------------- events ----------------
 
     def insert_events(self, events: Iterable[Event]) -> int:
         rows = [
-            (e.id, e.ts.isoformat(), e.stream, e.entity_id, e.kind, e.numeric, json.dumps(e.payload))
+            (e.id, e.ts.isoformat(), e.stream, e.entity_id, e.kind, e.numeric,
+             json.dumps(e.payload))
             for e in events
         ]
         self.conn.executemany(
@@ -232,7 +235,8 @@ class Blackboard:
         for r in self.conn.execute("SELECT * FROM anomalies ORDER BY score DESC, id"):
             out.append(
                 Anomaly(
-                    id=r["id"], detector=r["detector"], stream=r["stream"], entity_id=r["entity_id"],
+                    id=r["id"], detector=r["detector"], stream=r["stream"],
+                    entity_id=r["entity_id"],
                     window_start=datetime.fromisoformat(r["window_start"]),
                     window_end=datetime.fromisoformat(r["window_end"]),
                     score=r["score"], kind=r["kind"],

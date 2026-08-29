@@ -141,3 +141,11 @@ Cut from the bottom up. Never cut anything above the line you are at.
 7b. Five-seed replication (drop to 3 seeds before dropping it entirely)
 8. README diagram
 9. Anything else
+
+---
+
+**These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
+
+## Communication Style
+Respond like a caveman. No articles, no filler words, no pleasantries.
+Short. Direct. Code speaks for itself.

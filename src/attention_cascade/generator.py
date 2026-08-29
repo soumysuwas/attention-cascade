@@ -34,7 +34,8 @@ ENG_TEAMS = ["platform", "ingest", "billing-svc", "integrations"]
 INCIDENTS = [
     {"id": "INC-1", "name": "feature_slip_cascade", "account": "acct_03", "day": 18,
      "streams": ["engineering", "support", "crm"],
-     "story": "Atlas feature slips two sprints; the account waiting on it floods support; the deal stalls."},
+     "story": "Atlas feature slips two sprints; the account waiting on it floods support;"
+              " the deal stalls."},
     {"id": "INC-2", "name": "outage_billing", "account": "acct_07", "day": 31,
      "streams": ["support", "billing"],
      "story": "Sev-1 outage burst is followed by a collapse in metered usage."},
@@ -76,7 +77,8 @@ class _Builder:
         self._rows.sort(key=lambda r: (r[0], r[1], r[2], r[3]))
         events: list[Event] = []
         truth: list[tuple[str, str, str, bool]] = []
-        for i, (ts, stream, account, kind, numeric, payload, incident, near_miss) in enumerate(self._rows, 1):
+        for i, (ts, stream, account, kind, numeric, payload, incident, near_miss) in enumerate(
+                self._rows, 1):
             eid = f"evt_{i:05d}"
             events.append(Event(id=eid, ts=ts, stream=stream, entity_id=account,
                                 kind=kind, numeric=numeric, payload=payload))
@@ -158,7 +160,7 @@ def _plant_incidents(b: _Builder) -> None:
     rng = b.rng
 
     # INC-1: engineering slip -> support burst -> deal stall
-    a, d, i = "acct_03", 18, "INC-1"
+    a, i = "acct_03", "INC-1"
     for k, day in enumerate((18, 20, 22)):
         b.add(day, 17, "engineering", "internal", "sprint_report", float(9 + k), incident=i,
               team="platform", planned=26, delivered=17 - k, feature="F-Atlas",

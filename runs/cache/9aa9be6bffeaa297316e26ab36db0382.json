@@ -1,0 +1,12 @@
+{
+  "text": "[\n  {\"id\": \"evt_00336\", \"text\": \"Monthly API usage snapshot for acct_09: 9530.3 calls recorded for billing cycle.\"},\n  {\"id\": \"evt_00130\", \"text\": \"Billing meter reading for acct_06: 24346.7 API calls processed.\"},\n  {\"id\": \"evt_00070\", \"text\": \"Ticket #2 opened for acct_08: Severity 2 issue reported by client.\"},\n  {\"id\": \"evt_00057\", \"text\": \"Usage report acct_02: 27329.6 API calls logged for current period.\"},\n  {\"id\": \"evt_00296\", \"text\": \"New support ticket #3 for acct_09, marked as severity 3.\"},\n  {\"id\": \"evt_00116\", \"text\": \"Support request #3 opened for acct_04; priority set to level 3.\"},\n  {\"id\": \"evt_00086\", \"text\": \"Forecast update for acct_10: adjusted to 394691.0, down 1.3%.\"},\n  {\"id\": \"evt_00144\", \"text\": \"Ticket #2 opened for acct_02 regarding system performance issues.\"},\n  {\"id\": \"evt_00699\", \"text\": \"Support ticket #3 logged for acct_02; urgent review required.\"},\n  {\"id\": \"evt_00845\", \"text\": \"New ticket #2 for acct_04: user reporting login errors.\"}\n]",
+  "model": "gemini-3.1-flash-lite",
+  "tier": "enrich",
+  "input_tokens": 889,
+  "output_tokens": 384,
+  "thoughts_tokens": 0,
+  "cached_input_tokens": 0,
+  "latency_ms": 2197,
+  "cost_usd": 0.00079825,
+  "long_context": false
+}

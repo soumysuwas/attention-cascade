@@ -1,0 +1,60 @@
+DATASET STATISTICS
+====================================================================================================
+
+Total events: 1090   (target band 900-1100)
+
+By stream:
+  billing        278
+  crm            118
+  engineering    157
+  support        537
+
+By kind:
+  ticket_opened            537
+  usage_snapshot           253
+  forecast_update           79
+  sprint_report             41
+  deal_stage_change         38
+  bug_reopened              37
+  deploy                    35
+  invoice_issued            24
+  bug_closed                23
+  bug_opened                21
+  plan_change                1
+  contact_departed           1
+
+By account:
+  acct_01         61
+  acct_02        123
+  acct_03        118
+  acct_04         79
+  acct_05         72
+  acct_06         73
+  acct_07        117
+  acct_08         69
+  acct_09         72
+  acct_10         70
+  acct_11         90
+  acct_12         70
+  internal        76
+
+Planted incidents:  5  (expected 5)
+  INC-1  events=14  streams=crm,engineering,support
+  INC-2  events=8   streams=billing,support
+  INC-3  events=8   streams=billing,crm,support
+  INC-4  events=13  streams=billing,engineering,support
+  INC-5  events=5   streams=billing,crm
+Planted near-misses: 4  (expected 4)
+  NM-1  events=9   streams=support  <- single stream by design
+  NM-2  events=3   streams=billing  <- single stream by design
+  NM-3  events=2   streams=engineering  <- single stream by design
+  NM-4  events=1   streams=crm  <- single stream by design
+Ground-truth rows:  63
+
+events table columns: ['entity_id', 'id', 'kind', 'numeric', 'payload', 'stream', 'ts']
+incident column present in events table: False  (must be False)
+
+DETERMINISM CHECK (two fresh `generate` runs, same seed)
+  row counts equal:   True  (1090 vs 1090)
+  event ids identical: True
+  full rows identical: True

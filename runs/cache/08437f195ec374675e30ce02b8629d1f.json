@@ -1,0 +1,12 @@
+{
+  "text": "[\n  {\n    \"id\": \"evt_00360\",\n    \"text\": \"Ticket #3: User reporting intermittent login failures on acct_08; severity 3, needs investigation.\"\n  }\n]",
+  "model": "gemini-3.1-flash-lite",
+  "tier": "enrich",
+  "input_tokens": 276,
+  "output_tokens": 52,
+  "thoughts_tokens": 0,
+  "cached_input_tokens": 0,
+  "latency_ms": 3314,
+  "cost_usd": 0.000147,
+  "long_context": false
+}

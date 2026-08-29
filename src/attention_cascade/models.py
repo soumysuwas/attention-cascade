@@ -31,7 +31,10 @@ class Event(BaseModel):
         num = "" if self.numeric is None else f" val={self.numeric:g}"
         extra = " ".join(f"{k}={v}" for k, v in self.payload.items() if k != "text")
         text = self.payload.get("text", "")
-        return f"{self.id} {self.ts:%Y-%m-%d} {self.stream} {self.entity_id} {self.kind}{num} {extra} {text}".strip()
+        return (
+            f"{self.id} {self.ts:%Y-%m-%d} {self.stream} {self.entity_id} "
+            f"{self.kind}{num} {extra} {text}"
+        ).strip()
 
 
 class Anomaly(BaseModel):

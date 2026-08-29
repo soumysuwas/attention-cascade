@@ -1,0 +1,126 @@
+SAMPLE EVENTS
+========================================================================================================================
+
+--- CRM (first 20 by time) ------------------------------------------------------------
+  evt_00017 2026-06-01 crm         acct_05   deal_stage_change  val=250000 stage=proposal | Deal stage change for acct_05: Proposal stage, value 250,000.0.
+  evt_00027 2026-06-02 crm         acct_02   deal_stage_change  val=75000 stage=proposal | Deal for acct_02 moved to proposal stage, value $75,000.
+  evt_00028 2026-06-02 crm         acct_07   deal_stage_change  val=75000 stage=evaluation | Deal for acct_07 moved to evaluation stage; current value $75,000.
+  evt_00029 2026-06-02 crm         acct_03   deal_stage_change  val=75000 stage=evaluation | Deal for acct_03 moved to evaluation stage, value $75,000.
+  evt_00032 2026-06-02 crm         acct_12   forecast_update    val=432582 delta_pct=0.081 | Forecast updated for acct_12, new value $432,582.00, +8.1%.
+  evt_00042 2026-06-03 crm         acct_08   deal_stage_change  val=400000 stage=negotiation | Deal for acct_08 moved to negotiation, value 400000.0.
+  evt_00043 2026-06-03 crm         acct_01   forecast_update    val=264332 delta_pct=0.057 | Forecast update for acct_01: 264332.0, up 5.7%.
+  evt_00066 2026-06-04 crm         acct_04   deal_stage_change  val=75000 stage=proposal | Deal for acct_04 moved to proposal stage, value $75,000.00.
+  evt_00067 2026-06-04 crm         acct_06   deal_stage_change  val=40000 stage=evaluation | Deal for acct_06 moved to evaluation stage, value $40,000.
+  evt_00082 2026-06-05 crm         acct_11   deal_stage_change  val=250000 stage=negotiation | Deal for acct_11 moved to negotiation, value $250,000.
+  evt_00086 2026-06-05 crm         acct_10   forecast_update    val=394691 delta_pct=-0.013 | Forecast update for acct_10: adjusted to 394691.0, down 1.3%.
+  evt_00114 2026-06-06 crm         acct_05   forecast_update    val=279222 delta_pct=0.117 | Forecast update for acct_05: 279222.0, 11.7% increase.
+  evt_00115 2026-06-06 crm         acct_09   forecast_update    val=105807 delta_pct=-0.118 | Forecast update for acct_09: adjusted to 105807.0, down 11.8%.
+  evt_00136 2026-06-07 crm         acct_01   forecast_update    val=242922 delta_pct=-0.081 | Forecast updated for acct_01: $242,922, down 8.1%.
+  evt_00152 2026-06-08 crm         acct_08   deal_stage_change  val=400000 stage=closed_won | Deal closed won for acct_08, value $400,000.00.
+  evt_00154 2026-06-08 crm         acct_12   forecast_update    val=393122 delta_pct=-0.091 | Forecast update for acct_12: projected value adjusted to 393122.0, down 9.1%.
+  evt_00163 2026-06-09 crm         acct_11   contact_departed   val=0 contact_role=champion | Champion contact departed from acct_11.
+  evt_00164 2026-06-09 crm         acct_02   forecast_update    val=67831 delta_pct=-0.096 | Forecast for acct_02 adjusted to 67831.0, reflecting a 9.6% decrease.
+  evt_00185 2026-06-10 crm         acct_09   deal_stage_change  val=105807 stage=proposal | Deal for acct_09 moved to proposal stage, value 105807.0.
+  evt_00186 2026-06-10 crm         acct_07   deal_stage_change  val=75000 stage=proposal | Deal for acct_07 moved to proposal stage, value $75,000.
+
+--- ENGINEERING (first 20 by time) ------------------------------------------------------------
+  evt_00016 2026-06-01 engineering acct_11   bug_reopened       team=platform | Platform team: Bug reopened for acct_11; issue persists.
+  evt_00020 2026-06-01 engineering acct_10   bug_opened         team=ingest | Ingest team tracking new bug for acct_10.
+  evt_00022 2026-06-01 engineering acct_04   bug_reopened       team=platform | Platform team: bug reopened for acct_04, investigation pending.
+  evt_00030 2026-06-02 engineering acct_08   deploy             team=platform | Platform team deployed update to acct_08 environment.
+  evt_00033 2026-06-02 engineering acct_04   bug_reopened       team=billing-svc | Billing-svc team reopened bug for acct_04.
+  evt_00044 2026-06-03 engineering acct_06   bug_closed         team=ingest | Ingest team closed bug for acct_06.
+  evt_00048 2026-06-03 engineering acct_06   bug_closed         team=ingest | Ingest team closed bug for acct_06.
+  evt_00049 2026-06-03 engineering acct_05   bug_opened         team=platform | Platform team logged new bug for acct_05.
+  evt_00068 2026-06-04 engineering acct_04   deploy             team=platform | Platform team deployed new build to production.
+  evt_00069 2026-06-04 engineering internal  bug_closed         team=billing-svc | billing-svc: Resolved issue with invoice calculation logic.
+  evt_00074 2026-06-04 engineering internal  sprint_report      val=1 team=ingest planned=21 delivered=20 | Ingest team sprint 1: 20 of 21 tasks delivered.
+  evt_00075 2026-06-04 engineering acct_03   bug_reopened       team=ingest | Ingest team reopened bug for acct_03.
+  evt_00076 2026-06-04 engineering internal  sprint_report      val=1 team=platform planned=21 delivered=20 | Platform sprint report: 20 of 21 planned items delivered.
+  evt_00077 2026-06-04 engineering internal  sprint_report      val=3 team=integrations planned=28 delivered=25 | Integrations sprint report: 25 of 28 planned tasks delivered.
+  evt_00078 2026-06-04 engineering internal  sprint_report      val=0 team=billing-svc planned=18 delivered=18 | Billing-svc sprint report: 18 of 18 tasks completed.
+  evt_00079 2026-06-04 engineering acct_03   bug_reopened       team=platform | Platform team: Bug report reopened for acct_03; regression detected in latest build.
+  evt_00081 2026-06-05 engineering acct_03   deploy             team=ingest | Ingest team deployed update for acct_03.
+  evt_00083 2026-06-05 engineering acct_04   bug_reopened       team=integrations | Integrations team: Bug reopened, needs investigation.
+  evt_00090 2026-06-05 engineering acct_01   deploy             team=billing-svc | Billing-svc team: successful deployment completed.
+  evt_00091 2026-06-05 engineering internal  bug_closed         team=platform | Platform team closed internal bug ticket.
+
+--- SUPPORT (first 20 by time) ------------------------------------------------------------
+  evt_00013 2026-06-01 support     acct_02   ticket_opened      val=3 severity=3 | Support ticket opened for acct_02: Severity 3, general inquiry.
+  evt_00014 2026-06-01 support     acct_02   ticket_opened      val=3 severity=3 | Support ticket opened for acct_02, severity 3.
+  evt_00015 2026-06-01 support     acct_03   ticket_opened      val=3 severity=3 | Support ticket opened for acct_03, severity 3, 3 items.
+  evt_00018 2026-06-01 support     acct_11   ticket_opened      val=3 severity=3 | Support ticket created for acct_11, priority 3.
+  evt_00019 2026-06-01 support     acct_09   ticket_opened      val=3 severity=3 | Support ticket opened for acct_09, severity 3, 3 items.
+  evt_00021 2026-06-01 support     acct_02   ticket_opened      val=3 severity=3 | Support ticket opened for acct_02, severity 3, count 3.0.
+  evt_00023 2026-06-01 support     acct_07   ticket_opened      val=3 severity=3 | Support ticket opened for acct_07, severity 3.
+  evt_00024 2026-06-01 support     acct_01   ticket_opened      val=3 severity=3 | Critical support ticket opened for acct_01, severity 3.
+  evt_00025 2026-06-01 support     acct_07   ticket_opened      val=2 severity=2 | Support ticket opened for acct_07, severity 2.
+  evt_00026 2026-06-02 support     acct_07   ticket_opened      val=3 severity=3 | Support ticket opened for acct_07, severity 3, 3 items.
+  evt_00031 2026-06-02 support     acct_07   ticket_opened      val=3 severity=3 | Support ticket opened for acct_07, severity 3.
+  evt_00034 2026-06-02 support     acct_02   ticket_opened      val=3 severity=3 | Support ticket opened for acct_02; user unable to access dashboard.
+  evt_00035 2026-06-02 support     acct_08   ticket_opened      val=3 severity=3 | Support ticket opened for acct_08, severity 3.
+  evt_00036 2026-06-02 support     acct_03   ticket_opened      val=3 severity=3 | Support request logged for acct_03, priority 3.
+  evt_00037 2026-06-02 support     acct_01   ticket_opened      val=3 severity=3 | Support ticket opened for acct_01, severity 3.
+  evt_00038 2026-06-02 support     acct_07   ticket_opened      val=3 severity=3 | Support ticket opened for acct_07, severity 3, issue count 3.0.
+  evt_00039 2026-06-02 support     acct_12   ticket_opened      val=3 severity=3 | Support ticket opened for acct_12, severity 3.
+  evt_00040 2026-06-02 support     acct_05   ticket_opened      val=3 severity=3 | Support ticket opened for acct_05, severity 3.
+  evt_00041 2026-06-02 support     acct_02   ticket_opened      val=2 severity=2 | Support ticket opened for acct_02, severity 2, count 2.0.
+  evt_00045 2026-06-03 support     acct_03   ticket_opened      val=3 severity=3 | Support ticket opened for acct_03, severity 3.
+
+--- BILLING (first 20 by time) ------------------------------------------------------------
+  evt_00001 2026-06-01 billing     acct_12   usage_snapshot     val=7675.7 metric=api_calls | Billing usage snapshot for acct_12: 7,675.7 API calls.
+  evt_00002 2026-06-01 billing     acct_08   usage_snapshot     val=20670.6 metric=api_calls | API usage snapshot for acct_08: 20,670.6 calls.
+  evt_00003 2026-06-01 billing     acct_05   usage_snapshot     val=37612.4 metric=api_calls | API usage snapshot for acct_05: 37612.4 calls.
+  evt_00004 2026-06-01 billing     acct_11   usage_snapshot     val=32070.3 metric=api_calls | Billing: acct_11 monthly usage snapshot recorded at 32070.3 API calls.
+  evt_00005 2026-06-01 billing     acct_06   usage_snapshot     val=25781.8 metric=api_calls | Billing snapshot: acct_06 consumed 25,781.8 API calls.
+  evt_00006 2026-06-01 billing     acct_10   usage_snapshot     val=38632.3 metric=api_calls | API usage snapshot for acct_10: 38,632.3 calls.
+  evt_00007 2026-06-01 billing     acct_09   usage_snapshot     val=9410.5 metric=api_calls | Usage snapshot for acct_09: 9410.5 API calls.
+  evt_00008 2026-06-01 billing     acct_04   usage_snapshot     val=28203.8 metric=api_calls | Usage snapshot for acct_04: 28,203.8 API calls.
+  evt_00009 2026-06-01 billing     acct_01   usage_snapshot     val=36195.5 metric=api_calls | Billing cycle snapshot for acct_01: 36,195.5 API calls.
+  evt_00010 2026-06-01 billing     acct_07   usage_snapshot     val=32394.5 metric=api_calls | Billing usage snapshot for acct_07: 32,394.5 API calls.
+  evt_00011 2026-06-01 billing     acct_02   usage_snapshot     val=29586.1 metric=api_calls | Billing usage snapshot: 29586.1 API calls for acct_02.
+  evt_00012 2026-06-01 billing     acct_03   usage_snapshot     val=40518.6 metric=api_calls | API usage snapshot for acct_03: 40518.6 calls.
+  evt_00053 2026-06-04 billing     acct_03   usage_snapshot     val=40724 metric=api_calls | Billing snapshot: acct_03 usage reached 40,724.0 API calls.
+  evt_00054 2026-06-04 billing     acct_10   usage_snapshot     val=40727.5 metric=api_calls | Usage snapshot for acct_10: 40,727.5 API calls recorded.
+  evt_00055 2026-06-04 billing     acct_07   usage_snapshot     val=28775.1 metric=api_calls | Usage snapshot for acct_07: 28,775.1 API calls processed.
+  evt_00056 2026-06-04 billing     acct_12   usage_snapshot     val=7706.7 metric=api_calls | Billing: acct_12 monthly usage snapshot recorded at 7706.7 API calls.
+  evt_00057 2026-06-04 billing     acct_02   usage_snapshot     val=27329.6 metric=api_calls | Usage report acct_02: 27329.6 API calls logged for current period.
+  evt_00058 2026-06-04 billing     acct_09   usage_snapshot     val=10599.6 metric=api_calls | API usage snapshot for acct_09: 10,599.6 calls.
+  evt_00059 2026-06-04 billing     acct_04   usage_snapshot     val=28189.9 metric=api_calls | Monthly API usage snapshot for acct_04: 28,189.9 calls recorded.
+  evt_00060 2026-06-04 billing     acct_11   usage_snapshot     val=33000.4 metric=api_calls | API usage snapshot for acct_11: 33000.4 calls.
+
+========================================================================================================================
+ONE FULL INCIDENT CHAIN vs ONE NEAR-MISS CHAIN
+The point of enrichment is that these should NOT be separable by prose alone.
+========================================================================================================================
+
+--- REAL INCIDENT INC-1 (feature_slip_cascade) --------------------------------------------------
+  evt_00359 2026-06-19 engineering internal  sprint_report      val=9 team=platform planned=26 delivered=17 feature=F-Atlas | F-Atlas sprint summary: 17/26 tasks finished. Team velocity impacted by scope creep.
+  evt_00389 2026-06-21 engineering internal  sprint_report      val=10 team=platform planned=26 delivered=16 feature=F-Atlas | Platform sprint 10: F-Atlas feature delivered 16/26 points. Scope creep noted.
+  evt_00421 2026-06-23 engineering internal  sprint_report      val=11 team=platform planned=26 delivered=15 feature=F-Atlas | Platform sprint report: F-Atlas feature, 15 of 26 planned tasks delivered.
+  evt_00444 2026-06-25 support     acct_03   ticket_opened      val=2 severity=2 | Support ticket #2 opened for acct_03, severity 2.
+  evt_00447 2026-06-25 support     acct_03   ticket_opened      val=2 severity=2 | Support ticket opened for acct_03, severity 2.
+  evt_00460 2026-06-26 support     acct_03   ticket_opened      val=2 severity=2 | Support ticket opened for acct_03, severity 2.
+  evt_00474 2026-06-27 support     acct_03   ticket_opened      val=2 severity=2 | Support ticket opened for acct_03, severity 2, 2 items.
+  evt_00499 2026-06-28 support     acct_03   ticket_opened      val=2 severity=2 | Support ticket opened for acct_03, severity 2.
+  evt_00509 2026-06-29 support     acct_03   ticket_opened      val=2 severity=2 | Support ticket opened for acct_03, severity 2.
+  evt_00525 2026-06-30 support     acct_03   ticket_opened      val=2 severity=2 | Support ticket opened for acct_03, severity 2, count 2.0.
+  evt_00532 2026-06-30 support     acct_03   ticket_opened      val=2 severity=2 | Support ticket opened for acct_03, severity 2.
+  evt_00548 2026-07-01 support     acct_03   ticket_opened      val=2 severity=2 | Support ticket opened for acct_03, priority 2.
+  evt_00605 2026-07-04 crm         acct_03   deal_stage_change  val=250000 stage=evaluation regressed_from=negotiation | Deal for acct_03 regressed from negotiation to evaluation, $250,000.
+  evt_00643 2026-07-06 crm         acct_03   forecast_update    val=150000 delta_pct=-0.4 | Forecast update for acct_03: projected value adjusted to 150000.0, down 40%.
+
+--- NEAR-MISS NM-1 (support-only lookalike) --------------------------------------------------
+  evt_00836 2026-07-16 support     acct_02   ticket_opened      val=2 severity=2 | New support ticket for acct_02, severity 2, issue count 2.
+  evt_00841 2026-07-16 support     acct_02   ticket_opened      val=2 severity=2 | Support ticket opened for acct_02, severity 2.
+  evt_00854 2026-07-17 support     acct_02   ticket_opened      val=2 severity=2 | Support ticket opened for acct_02, severity 2, 2 items.
+  evt_00862 2026-07-17 support     acct_02   ticket_opened      val=2 severity=2 | Support ticket opened for acct_02, severity 2.
+  evt_00865 2026-07-18 support     acct_02   ticket_opened      val=2 severity=2 | Support ticket opened for acct_02: 2 items, medium severity.
+  evt_00869 2026-07-18 support     acct_02   ticket_opened      val=2 severity=2 | Support ticket opened for acct_02; investigation into intermittent login errors.
+  evt_00875 2026-07-18 support     acct_02   ticket_opened      val=2 severity=2 | Support ticket opened for acct_02, severity 2, 2 items.
+  evt_00893 2026-07-19 support     acct_02   ticket_opened      val=2 severity=2 | Support ticket opened for acct_02, severity 2.
+  evt_00895 2026-07-19 support     acct_02   ticket_opened      val=2 severity=2 | New support ticket opened for acct_02, severity level 2.
+
+INC-1 spans engineering -> support -> crm: three systems, one account, one story.
+NM-1 is support only. It never corroborates, so the sufficiency gate must
+reject it.

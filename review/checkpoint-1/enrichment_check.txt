@@ -1,0 +1,31 @@
+ENRICHMENT CHECK — text only, labels stripped
+====================================================================================================
+If the two columns are textually distinguishable, enrichment failed and the experiment
+has a confound: a model could surface incidents by spotting distinctive prose rather
+than by reasoning across systems.
+
+Enrichment applied: YES
+
+--- 10 NOISE EVENTS ------------------------------------------------------------
+   1. Billing usage snapshot for acct_12: 7,675.7 API calls.
+   2. Invoice issued for acct_12, total $6,492.14.
+   3. Platform team closed bug report for acct_10.
+   4. Support ticket opened for acct_03, severity 2.
+   5. Support ticket opened for acct_02, severity 3.
+   6. Monthly API usage snapshot for acct_09: 9254.7 calls recorded.
+   7. Usage snapshot for acct_01: 36,472.8 API calls recorded.
+   8. Support ticket opened for acct_07, severity 2.
+   9. Billing-svc team deployed update for acct_12.
+  10. Integrations team reopened internal bug ticket.
+
+--- 10 PLANTED-INCIDENT EVENTS --------------------------------------------------
+   1. Champion contact departed from acct_11.
+   2. F-Atlas sprint summary: 17/26 tasks finished. Team velocity impacted by scope creep.
+   3. Platform sprint report: F-Atlas feature, 15 of 26 planned tasks delivered.
+   4. Usage snapshot for acct_11: 19,220.0 API calls.
+   5. Support ticket opened for acct_03, severity 2.
+   6. Urgent support ticket #1 opened for acct_07: Production environment down.
+   7. Usage snapshot for acct_07: 10920.0 API calls.
+   8. Integrations team reopened bug ticket.
+   9. API usage report for acct_09: 8,460 calls.
+  10. Support ticket opened for acct_02, severity 2.

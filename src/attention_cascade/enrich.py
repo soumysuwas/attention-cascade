@@ -103,6 +103,18 @@ async def enrich(db_path: Path | None = None, seed: int = C.SEED) -> dict:
 
     await asyncio.gather(*(guarded(i, b) for i, b in enumerate(batches)))
 
+    # Repair pass. A model occasionally omits an id from its array, which leaves that event
+    # holding its canned generator string - exactly the confound enrichment exists to remove.
+    # Re-ask for the stragglers in small batches until none are left or we run out of rounds.
+    for round_no in range(3):
+        missing = [r for r in rows if r["id"] not in updates]
+        if not missing:
+            break
+        meter.audit("enrich", "REPAIR_ROUND", {"round": round_no, "missing": len(missing)})
+        repairs = [missing[i : i + 10] for i in range(0, len(missing), 10)]
+        await asyncio.gather(*(guarded(1000 + round_no * 100 + i, b)
+                               for i, b in enumerate(repairs)))
+
     for row in rows:
         new_text = updates.get(row["id"])
         if not new_text:
@@ -115,7 +127,8 @@ async def enrich(db_path: Path | None = None, seed: int = C.SEED) -> dict:
     conn.close()
 
     stats = {"events": len(rows), "rewritten": len(updates),
-             "batches": len(batches), "failed_batches": failures, "seed": seed}
+             "batches": len(batches), "failed_batches": failures, "seed": seed,
+             "unrewritten": [r["id"] for r in rows if r["id"] not in updates]}
     meter.audit("enrich", "DONE", stats)
     meter.close()
     return stats
