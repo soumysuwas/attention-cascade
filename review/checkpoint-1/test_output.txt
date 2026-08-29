@@ -58,4 +58,4 @@ tests/test_no_groundtruth_leak.py::test_module_does_not_reference_incident_field
 tests/test_no_groundtruth_leak.py::test_module_does_not_reference_incident_fields[cli.py] PASSED [ 97%]
 tests/test_no_groundtruth_leak.py::test_events_table_has_no_incident_column PASSED [100%]
 
-============================== 46 passed in 0.37s ==============================
+============================== 46 passed in 0.40s ==============================

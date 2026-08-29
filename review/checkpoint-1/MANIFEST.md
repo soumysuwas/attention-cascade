@@ -1,11 +1,10 @@
 # Review packet — Checkpoint 1: Data foundation
-Generated: 2026-08-29T10:47:14+00:00   Commit: 38e77f5
+Generated: 2026-08-29T10:48:06+00:00   Commit: a5eefaa
 
 ## Claim
 The dataset foundation is built, deterministic, quarantined from the pipeline, and enriched so planted incidents are not textually distinguishable from noise. One box is NOT met: the configured Tier 2 / baseline model id does not exist in this project, and per SPEC I stopped rather than substituting one.
 
 ## Files in this packet
-- `.gitkeep` — see checkpoint report
 - `CHECKPOINT_REPORT.md` — the claim being made, box by box
 - `DECISIONS.md` — the trade-offs, each with its rejected alternative and its cost
 - `SCORECARD.md` — metric and rubric trend across checkpoints
