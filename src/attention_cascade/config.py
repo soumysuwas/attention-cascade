@@ -117,17 +117,26 @@ TARGET_EVENT_COUNT = (900, 1100)  # inclusive sanity band, asserted in tests
 # --------------------------------------------------------------------------------------
 # Tier 0 detector thresholds
 # Tune these on noise density only. NEVER tune them by looking at ground truth.
+#
+# Tuned 2026-08-29 against TOTAL anomaly volume only, to land inside the 60-100 band the spec
+# asks for (46 -> 68). The originals were set so tight that several detectors could only fire on
+# planted structure, which flatters Tier 0's precision and leaves the tiers above it nothing real
+# to be wrong about. These values deliberately let the upper tail of the NOISE distribution
+# through: noise sprint slips top out at 4 points and noise forecast cuts at -12%, so both
+# detectors now fire on ordinary weeks as well as on incidents. Ground truth was not consulted.
 # --------------------------------------------------------------------------------------
 CRM_STAGE_STALL_DAYS = 21
-CRM_FORECAST_DROP_PCT = -0.25
-ENG_SLIP_POINTS = 6
+CRM_FORECAST_DROP_PCT = -0.10
+ENG_SLIP_POINTS = 4
 ENG_REOPEN_Z = 2.0
-SUPPORT_VOLUME_Z = 2.0
-SUPPORT_SEVERITY_MIN = 3          # count of sev1 in a 3-day window
+SUPPORT_VOLUME_Z = 1.8
+SUPPORT_SEVERITY_MIN = 2          # count of sev1 in a 3-day window
 SUPPORT_SILENCE_DAYS = 10         # zero tickets for an account averaging > 1/day
 SUPPORT_SILENCE_MIN_BASELINE = 0.8
-BILLING_USAGE_DROP_PCT = -0.30
+BILLING_USAGE_DROP_PCT = -0.18
 BILLING_DISPUTE_MIN = 2
+BILLING_DROP_COOLDOWN_DAYS = 14   # one anomaly per decline episode, not one per snapshot
+BILLING_INVOICE_DEVIATION = 0.25  # invoice this far from the account's own median is odd
 
 # --------------------------------------------------------------------------------------
 # Tier 1 / Tier 2
