@@ -39,7 +39,8 @@ COMPONENTS = ["F-Atlas", "integrations", "reporting", "sso-auth",
 
 # What the ticket is actually about. Exists so the enricher has real content to vary; without it
 # every enriched ticket collapsed to "Support ticket opened for acct_NN, severity 2."
-SYMPTOMS = ["cannot log in", "slow response times", "unexpected 500 error", "missing data in export",
+SYMPTOMS = ["cannot log in", "slow response times", "unexpected 500 error",
+            "missing data in export",
             "configuration question", "permission denied", "requests timing out",
             "totals do not reconcile", "webhook not firing", "report renders blank"]
 

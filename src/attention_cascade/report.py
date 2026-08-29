@@ -252,9 +252,11 @@ def linkage(db: Path | None = None) -> dict[str, dict]:
             changed = False
             for (a, bstream) in edges:
                 if a in seen and bstream not in seen:
-                    seen.add(bstream); changed = True
+                    seen.add(bstream)
+                    changed = True
                 elif bstream in seen and a not in seen:
-                    seen.add(a); changed = True
+                    seen.add(a)
+                    changed = True
 
         out[key] = {
             "is_near_miss": inc.is_near_miss,
