@@ -44,10 +44,10 @@ GCP_LOCATION = os.environ.get("GOOGLE_CLOUD_LOCATION", "us-central1")
 
 # Model ids. VERIFY THESE ON YOUR MACHINE with `uv run ac verify --list-models` before the
 # first real run - Vertex model ids and regional availability move faster than any doc.
-TIER1_MODEL = "gemini-3.1-flash-lite"   # triage: cheap, high volume, thinking OFF
-TIER2_MODEL = "gemini-3.1-pro"          # correlation: the only place real money is spent
-BASELINE_MODEL = "gemini-3.1-pro"       # same model as Tier 2, so the comparison is honest
-MIDTIER_MODEL = "gemini-3.7-flash"      # optional second baseline, see note below
+TIER1_MODEL = "gemini-3.5-flash-lite"     # triage: cheap, high volume, thinking OFF
+TIER2_MODEL = "gemini-3.1-pro-preview"    # correlation: the only place real money is spent
+BASELINE_MODEL = "gemini-3.1-pro-preview" # same model as Tier 2, so the comparison is honest
+MIDTIER_MODEL = "gemini-3.7-flash"        # optional second baseline, see note below
 
 # --------------------------------------------------------------------------------------
 # PRICING - USD per million tokens, Vertex standard tier. VERIFIED 2026-08-29.
@@ -78,6 +78,17 @@ PRICING: dict[str, dict[str, float | None]] = {
         "long_ctx_threshold": None, "long_input": None, "long_output": None,
     },
     "gemini-3.1-pro": {
+        "input": 2.00, "output": 12.00,
+        "long_ctx_threshold": 200_000, "long_input": 4.00, "long_output": 18.00,
+    },
+    "gemini-3.5-flash-lite": {
+        "input": 0.30, "output": 2.50,
+        "long_ctx_threshold": None, "long_input": None, "long_output": None,
+    },
+    "gemini-3.1-pro-preview": {
+        # Preview endpoint bills at the same standard rate as GA 3.1 Pro. Verified 2026-08-29
+        # against published batch pricing for this exact id ($1.00/$6.00 = 50% of $2/$12).
+        # Long-context surcharge above 200K input applies to the Pro tier.
         "input": 2.00, "output": 12.00,
         "long_ctx_threshold": 200_000, "long_input": 4.00, "long_output": 18.00,
     },

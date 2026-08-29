@@ -202,6 +202,8 @@ def review(checkpoint: int = typer.Option(..., "--checkpoint", "-c", min=1, max=
     for p in sorted(dest.iterdir()):
         if p.is_file():
             console.print(f"    {p.name:<28} {p.stat().st_size:>8} bytes")
+    # Last line, always: the flat folder the reviewer uploads.
+    console.print(f"\n[bold]UPLOAD THIS FOLDER:[/] {(C.ROOT / 'review_artifacts').resolve()}")
 
 
 def _model_availability_text() -> str:
@@ -220,6 +222,19 @@ def _model_availability_text() -> str:
     except Exception as exc:  # noqa: BLE001
         lines.append(f"  catalogue listing failed: {exc}")
     return "\n".join(lines)
+
+
+@app.command(name="check-linkage")
+def check_linkage() -> None:
+    """Assert every planted incident is structurally joinable across its streams.
+
+    This is the check that would have caught the enrichment defect automatically: enrichment
+    rewrites prose, so any incident whose hops were linked only by wording silently became
+    undiscoverable. Run it after every generator change.
+    """
+    text, ok = report.linkage_report()
+    console.print(text)
+    raise typer.Exit(0 if ok else 1)
 
 
 @app.command()

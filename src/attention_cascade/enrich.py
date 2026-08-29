@@ -31,16 +31,27 @@ SYSTEM = """You write realistic one-line records for enterprise systems. You wil
 of structured events from a CRM, an engineering tracker, a support desk, and a billing system.
 
 For each event, write the human-readable text a real system would have stored: a ticket subject
-line, a deal note, a sprint comment, a billing memo. Match the event's kind, its account, and its
-numeric value where one is given. Vary phrasing, length, tone and specificity the way real records
-do - some terse, some rambling, some with typos or internal shorthand.
+line, a deal note, a sprint comment, a billing memo.
+
+USE THE STRUCTURED FIELDS. If the event has a "component", "feature", "release", "team", "stage"
+or "symptom" field, work that value into the text naturally, the way a real record would name the
+thing it is about. A support ticket about component "F-Atlas" mentions Atlas. A ticket with
+release "v3.11" mentions the version. Do not drop these - they are the only thing that makes one
+record recognisably about the same subject as another.
+
+VARY THE WRITING HARD. Real queues do not look uniform. Length must range from about 5 words to
+about 25 across the batch: some clipped fragments, some full sentences, some rambling with an
+aside. Vary register too - terse engineer shorthand, a polite customer paraphrase, an internal
+note with an abbreviation. Some may contain a typo. Do NOT write every record to the same
+template, and never fall back on a formula like "Support ticket opened for <account>, severity N"
+- that carries no information and it is the failure mode to avoid.
 
 Write each line INDEPENDENTLY. The events in this batch are unrelated to each other and arrive in
 random order; do not try to build a narrative across them or reference one from another.
 
 Return ONLY a JSON array, no other text:
 [{"id": "evt_00001", "text": "..."}]
-One object per input event, same ids, max 20 words each."""
+One object per input event, same ids, 5 to 25 words each."""
 
 
 def _fields(row: sqlite3.Row) -> dict:
@@ -79,18 +90,28 @@ async def enrich(db_path: Path | None = None, seed: int = C.SEED) -> dict:
     updates: dict[str, str] = {}
     failures = 0
 
+    hallucinated: set[str] = set()
+
     async def do_batch(idx: int, batch: list[sqlite3.Row]) -> None:
         nonlocal failures
+        allowed = {r["id"] for r in batch}
         prompt = json.dumps([_fields(r) for r in batch], indent=None)
         try:
             res = await call(
                 model=C.TIER1_MODEL, system=SYSTEM, prompt=prompt,
-                max_tokens=2000, tier="enrich", run_id=f"enrich-{seed}", bb=meter,
+                max_tokens=4000, tier="enrich", run_id=f"enrich-{seed}", bb=meter,
                 thinking_budget=0, json_output=True,
             )
             for item in parse_json(res.text):
-                if isinstance(item, dict) and "id" in item and "text" in item:
-                    updates[str(item["id"])] = str(item["text"])[:200]
+                if not (isinstance(item, dict) and "id" in item and "text" in item):
+                    continue
+                eid = str(item["id"])
+                # The model sometimes returns ids that were never in the batch. Accepting them
+                # silently inflated the rewritten count above the corpus size. Drop and count.
+                if eid not in allowed:
+                    hallucinated.add(eid)
+                    continue
+                updates[eid] = str(item["text"])[:200]
         except Exception as exc:  # noqa: BLE001 - a failed batch keeps its original text
             failures += 1
             meter.audit("enrich", "BATCH_FAILED", {"batch": idx, "error": str(exc)[:300]})
@@ -128,7 +149,8 @@ async def enrich(db_path: Path | None = None, seed: int = C.SEED) -> dict:
 
     stats = {"events": len(rows), "rewritten": len(updates),
              "batches": len(batches), "failed_batches": failures, "seed": seed,
-             "unrewritten": [r["id"] for r in rows if r["id"] not in updates]}
+             "unrewritten": [r["id"] for r in rows if r["id"] not in updates],
+             "hallucinated_ids": len(hallucinated)}
     meter.audit("enrich", "DONE", stats)
     meter.close()
     return stats

@@ -16,7 +16,7 @@
     "acct_11",
     "acct_12"
   ],
-  "event_count": 1090,
+  "event_count": 1076,
   "incidents": [
     {
       "id": "INC-1",
@@ -102,6 +102,12 @@
       "account": "acct_06",
       "day": 50,
       "stream": "crm"
+    },
+    {
+      "id": "NM-5",
+      "account": "acct_10",
+      "day": 52,
+      "stream": "multi"
     }
   ],
   "silence_windows": {

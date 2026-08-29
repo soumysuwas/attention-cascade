@@ -1,0 +1,12 @@
+{
+  "text": "[\n  {\"id\": \"evt_01005\", \"text\": \"Customer getting persistent permission denied errors on outgoing webhooks, severity 3 triage needed.\"},\n  {\"id\": \"evt_01009\", \"text\": \"Reopened the platform bug because the race condition is still triggering on node restarts.\"},\n  {\"id\": \"evt_01058\", \"text\": \"Bumped the forecast up by 7.1 percent following yesterday's positive legal review call.\"},\n  {\"id\": \"evt_01069\", \"text\": \"F-Atlas export is missing data rows for the last two quarters, investigating export worker logs.\"}\n]",
+  "model": "gemini-3.5-flash-lite",
+  "tier": "enrich",
+  "input_tokens": 698,
+  "output_tokens": 148,
+  "thoughts_tokens": 0,
+  "cached_input_tokens": 0,
+  "latency_ms": 6822,
+  "cost_usd": 0.0005794,
+  "long_context": false
+}

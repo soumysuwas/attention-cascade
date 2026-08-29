@@ -1,0 +1,12 @@
+{
+  "text": "[\n  {\n    \"id\": \"evt_01066\",\n    \"text\": \"Client called regarding integrations configuration question for the webhook endpoints, needs clarification on OAuth headers asap.\"\n  },\n  {\n    \"id\": \"evt_01074\",\n    \"text\": \"Urgent: data-export showing missing data in export for the quarterly financial reports, customer is blocked.\"\n  }\n]",
+  "model": "gemini-3.5-flash-lite",
+  "tier": "enrich",
+  "input_tokens": 563,
+  "output_tokens": 94,
+  "thoughts_tokens": 0,
+  "cached_input_tokens": 0,
+  "latency_ms": 1188,
+  "cost_usd": 0.0004039,
+  "long_context": false
+}

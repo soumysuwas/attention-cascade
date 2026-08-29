@@ -5,6 +5,7 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 data/events.db
+data/audit.jsonl
 data/events.db-wal
 data/events.db-shm
 runs/*/run.db

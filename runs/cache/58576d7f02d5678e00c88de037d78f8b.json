@@ -1,0 +1,12 @@
+{
+  "text": "[\n  {\"id\": \"evt_00035\", \"text\": \"Bumped the forecast up by roughly 5.7 percent after yesterday's call with the procurement committee.\"},\n  {\"id\": \"evt_00054\", \"text\": \"Monthly usage snapshot shows 25,592.5 API calls billed for the current cycle.\"},\n  {\"id\": \"evt_00058\", \"text\": \"Sev-3 ticket: user cannot log in using the F-Atlas module since this morning's patch.\"},\n  {\"id\": \"evt_00069\", \"text\": \"Integrations team sprint wrap: 25 delivered out of 28 planned story points.\"},\n  {\"id\": \"evt_00073\", \"text\": \"Customer called in with a configuration question regarding the standard reporting dashboard.\"},\n  {\"id\": \"evt_00184\", \"text\": \"Deal advanced to negotiation stage with revised legal terms.\"},\n  {\"id\": \"evt_01003\", \"text\": \"User has a configuration question about the CRM integrations setup.\"},\n  {\"id\": \"evt_01004\", \"text\": \"Getting a permission denied error when triggering outbound webhooks from production.\"},\n  {\"id\": \"evt_01056\", \"text\": \"Reported an issue in the billing-portal where monthly invoice totals do not reconcile with usage logs.\"},\n  {\"id\": \"evt_01060\", \"text\": \"Revise revenue forecast up by 14.7 percent following strong expansion indicators.\"}\n]",
+  "model": "gemini-3.5-flash-lite",
+  "tier": "enrich",
+  "input_tokens": 1178,
+  "output_tokens": 352,
+  "thoughts_tokens": 0,
+  "cached_input_tokens": 0,
+  "latency_ms": 3067,
+  "cost_usd": 0.0012334,
+  "long_context": false
+}

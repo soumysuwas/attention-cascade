@@ -17,6 +17,18 @@ Implement this as `ac review --checkpoint N` so it is one command and cannot be 
 
 ---
 
+The upload folder
+
+After building review/checkpoint-N/, mirror every file from that packet into a flat folder review_artifacts/ at the repo root. Wipe it first, so it always holds exactly one checkpoint's worth of files — the current one. Overwriting same-named files is intended.
+
+review/checkpoint-N/ is the archive and is never touched again. review_artifacts/ is the upload folder: Soumy always uploads from the same path regardless of which checkpoint it is, and never has to work out which files are current.
+
+Print its absolute path as the final line of ac review --checkpoint N.
+
+Add review_artifacts/ to .gitignore — it is a derived mirror, and committing both copies doubles the diff for no benefit. review/checkpoint-N/ stays committed.
+
+---
+
 ## What goes in every packet, at every checkpoint
 
 | File in `review/checkpoint-N/` | Source | Why the reviewer needs it |

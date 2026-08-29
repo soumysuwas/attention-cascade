@@ -28,6 +28,37 @@ CHATTY = {"acct_02", "acct_03", "acct_07", "acct_11"}
 CRM_STAGES = ["discovery", "evaluation", "proposal", "negotiation", "closed_won", "closed_lost"]
 ENG_TEAMS = ["platform", "ingest", "billing-svc", "integrations"]
 
+# Product areas a support ticket can be filed against. This pool is the JOIN KEY between the
+# engineering stream (organised by team and feature, entity_id="internal") and the support stream
+# (organised by account). Delivery trackers really are not organised by customer, so the
+# correlator has to bridge that asymmetry through a shared component name rather than through an
+# account equality check - which is the more interesting problem, and the one worth paying a
+# frontier model for. Noise tickets sample this same pool, so no value is unique to an incident.
+COMPONENTS = ["F-Atlas", "integrations", "reporting", "sso-auth",
+              "data-export", "billing-portal", "webhooks", "ingest-api"]
+
+# What the ticket is actually about. Exists so the enricher has real content to vary; without it
+# every enriched ticket collapsed to "Support ticket opened for acct_NN, severity 2."
+SYMPTOMS = ["cannot log in", "slow response times", "unexpected 500 error", "missing data in export",
+            "configuration question", "permission denied", "requests timing out",
+            "totals do not reconcile", "webhook not firing", "report renders blank"]
+
+# Per-incident symptom pools. A single pinned symptom made all eleven of INC-1's tickets read
+# near-identically once enriched, which is a prose tell of exactly the kind enrichment exists to
+# remove. Real queues describe one underlying problem many different ways, so these do too.
+# The COMPONENT is what carries the join; the symptom only carries realism.
+INCIDENT_SYMPTOMS = {
+    "INC-1": ["blocked waiting on the Atlas rollout", "when is Atlas shipping",
+              "Atlas timeline slipped again", "cannot start migration until Atlas lands",
+              "need an ETA on Atlas before we can plan"],
+    "INC-2": ["platform unreachable, total outage", "all API calls failing",
+              "cannot reach the service at all", "hard down since this morning"],
+    "INC-3": ["bill tripled after the plan change", "invoice does not match the quoted plan",
+              "metered charges look wrong", "unexpected overage on the new plan"],
+    "INC-4": ["webhooks failing signature validation", "webhook deliveries rejected since upgrade",
+              "signature mismatch on every callback", "integration callbacks stopped arriving"],
+}
+
 # --------------------------------------------------------------------------------------
 # Incident definitions. Each is a real cross-system causal chain spanning 2-3 streams.
 # --------------------------------------------------------------------------------------
@@ -52,11 +83,17 @@ INCIDENTS = [
 
 # Single-stream lookalikes with no corroborating second system. These are what the
 # sufficiency gate must reject. If one escalates, it is a false escalation.
+# Lookalikes the sufficiency gate must reject. NM-1..NM-4 are single-stream, so rule 2 rejects
+# them on structure alone. NM-5 is deliberately NOT: it is two streams, one account, one window,
+# and causally unrelated. It passes sufficiency and is left for the confidence floor to catch -
+# or to miss. Either outcome is a finding worth reporting, and without it nothing in the corpus
+# exercises the floor at all and the gate gets credit for an if-statement.
 NEAR_MISSES = [
     {"id": "NM-1", "account": "acct_02", "day": 45, "stream": "support"},
     {"id": "NM-2", "account": "acct_04", "day": 22, "stream": "billing"},
     {"id": "NM-3", "account": "acct_08", "day": 27, "stream": "engineering"},
     {"id": "NM-4", "account": "acct_06", "day": 50, "stream": "crm"},
+    {"id": "NM-5", "account": "acct_10", "day": 52, "stream": "multi"},
 ]
 
 
@@ -118,7 +155,7 @@ def _noise(b: _Builder, silence_windows: dict[str, tuple[int, int]]) -> None:
             delivered = planned - rng.randint(0, 4)
             b.add(day, 17, "engineering", "internal", "sprint_report", float(planned - delivered),
                   team=team, planned=planned, delivered=delivered, text=f"{team} sprint close")
-    for _ in range(110):
+    for _ in range(98):
         day = rng.randint(0, C.N_DAYS - 1)
         acct = rng.choice(ACCOUNTS + ["internal"] * 4)
         kind = rng.choice(["bug_opened", "bug_closed", "bug_reopened", "deploy"])
@@ -135,10 +172,10 @@ def _noise(b: _Builder, silence_windows: dict[str, tuple[int, int]]) -> None:
             n = sum(1 for _ in range(3) if rng.random() < lam / 3)
             for _ in range(n):
                 sev = rng.choices([1, 2, 3], weights=[0.05, 0.3, 0.65])[0]
+                symptom = rng.choice(SYMPTOMS)
                 b.add(day, rng.randint(8, 20), "support", acct, "ticket_opened", float(sev),
-                      severity=sev, text=rng.choice(
-                          ["login issue", "report export slow", "how do I configure sso",
-                           "dashboard blank", "invoice question", "api 500 intermittent"]))
+                      severity=sev, component=rng.choice(COMPONENTS), symptom=symptom,
+                      text=symptom)
 
     # Billing: usage snapshot every 3 days per account, plus monthly invoices.
     for acct in ACCOUNTS:
@@ -165,10 +202,13 @@ def _plant_incidents(b: _Builder) -> None:
         b.add(day, 17, "engineering", "internal", "sprint_report", float(9 + k), incident=i,
               team="platform", planned=26, delivered=17 - k, feature="F-Atlas",
               text="Atlas milestone slipped again")
+    # The join to engineering. Engineering is entity_id="internal", so account equality cannot
+    # link these two hops - only the shared component value can. F-Atlas is in the noise pool too.
     for day in range(24, 31):
         for _ in range(rng.randint(1, 2)):
+            sym = rng.choice(INCIDENT_SYMPTOMS["INC-1"])
             b.add(day, rng.randint(9, 18), "support", a, "ticket_opened", 2.0, incident=i,
-                  severity=2, text="when is Atlas shipping, blocked on rollout")
+                  severity=2, component="F-Atlas", symptom=sym, text=sym)
     b.add(33, 10, "crm", a, "deal_stage_change", 250_000.0, incident=i,
           stage="evaluation", regressed_from="negotiation", text="deal moved back to evaluation")
     b.add(35, 11, "crm", a, "forecast_update", 150_000.0, incident=i,
@@ -177,8 +217,9 @@ def _plant_incidents(b: _Builder) -> None:
     # INC-2: sev-1 burst -> usage collapse
     a, i = "acct_07", "INC-2"
     for day in (31, 31, 32, 33, 33):
+        sym = rng.choice(INCIDENT_SYMPTOMS["INC-2"])
         b.add(day, rng.randint(1, 23), "support", a, "ticket_opened", 1.0, incident=i,
-              severity=1, text="platform unreachable, total outage")
+              severity=1, component="ingest-api", symptom=sym, text=sym)
     for day, mult in ((34, 0.42), (37, 0.38), (40, 0.45)):
         b.add(day, 2, "billing", a, "usage_snapshot", round(26_000 * mult, 1), incident=i,
               metric="api_calls", text="3-day usage rollup")
@@ -188,8 +229,10 @@ def _plant_incidents(b: _Builder) -> None:
     b.add(12, 6, "billing", a, "plan_change", 0.0, incident=i,
           from_plan="legacy_flat", to_plan="usage_metered", text="forced migration to metered plan")
     for day in (14, 15, 17, 18, 19, 20):
+        sym = rng.choice(INCIDENT_SYMPTOMS["INC-3"])
         b.add(day, rng.randint(9, 18), "support", a, "ticket_opened", 2.0, incident=i,
-              severity=2, category="billing_dispute", text="bill tripled after plan change")
+              severity=2, category="billing_dispute", component="billing-portal",
+              symptom=sym, text=sym)
     b.add(26, 11, "crm", a, "forecast_update", 66_000.0, incident=i,
           delta_pct=-0.45, text="renewal at risk over pricing")
 
@@ -203,9 +246,12 @@ def _plant_incidents(b: _Builder) -> None:
     for day, mult in ((42, 0.51), (45, 0.47), (48, 0.5)):
         b.add(day, 2, "billing", a, "usage_snapshot", round(18_000 * mult, 1), incident=i,
               metric="api_calls", text="3-day usage rollup")
+    # The join to engineering, twice over: component matches the deploy's team, release matches
+    # its release string. Engineering is entity_id="internal", so again only the values link them.
     for day in (43, 45, 46, 47):
+        sym = rng.choice(INCIDENT_SYMPTOMS["INC-4"])
         b.add(day, rng.randint(9, 18), "support", a, "ticket_opened", 2.0, incident=i,
-              severity=2, text="webhooks failing signature validation since last week")
+              severity=2, component="integrations", release="v3.11", symptom=sym, text=sym)
 
     # INC-5: champion departs -> silence -> usage decay. The silence is created by the
     # silence_window passed into _noise; here we plant the bookends.
@@ -239,9 +285,36 @@ def _plant_near_misses(b: _Builder) -> None:
                       incident=i, near_miss=True, team="ingest", planned=24, delivered=14 - k,
                       text="ingest sprint slipped")
         elif nm["stream"] == "crm":
+            # Three events, not one. A single CRM row was too thin to test anything: the gate
+            # rejects it as single-source no matter how good or bad the gate is.
             b.add(day, 11, "crm", a, "forecast_update", 48_000.0,
                   incident=i, near_miss=True, delta_pct=-0.38,
                   text="forecast cut after budget freeze")
+            b.add(day + 4, 10, "crm", a, "deal_stage_change", 48_000.0,
+                  incident=i, near_miss=True, stage="evaluation",
+                  regressed_from="proposal", text="pushed back to evaluation")
+            b.add(day + 9, 11, "crm", a, "forecast_update", 34_000.0,
+                  incident=i, near_miss=True, delta_pct=-0.29,
+                  text="forecast trimmed again pending budget sign-off")
+        elif nm["stream"] == "multi":
+            # NM-5: two streams, one account, one window, NO causal link. A support spike from an
+            # onboarding wave sits alongside a usage dip whose cause is innocent and stated in the
+            # data (a seasonal shutdown). This passes the two-source sufficiency check, so it is
+            # the ONLY thing in the corpus that reaches the confidence floor. If the floor lets it
+            # through it is a false escalation; if it holds, the floor earned its place. Either
+            # way it is a measured result rather than an untested rule.
+            for d in range(day, day + 4):
+                for _ in range(rng.randint(2, 3)):
+                    b.add(d, rng.randint(9, 18), "support", a, "ticket_opened", 3.0,
+                          incident=i, near_miss=True, severity=3,
+                          component=rng.choice(["sso-auth", "reporting", "data-export"]),
+                          symptom="onboarding walkthrough question",
+                          text="onboarding walkthrough question")
+            for d, mult in ((day + 1, 0.66), (day + 4, 0.61)):
+                b.add(d, 2, "billing", a, "usage_snapshot", round(15_000 * mult, 1),
+                      incident=i, near_miss=True, metric="api_calls",
+                      note="customer holiday shutdown, scheduled",
+                      text="3-day usage rollup")
 
 
 # --------------------------------------------------------------------------------------

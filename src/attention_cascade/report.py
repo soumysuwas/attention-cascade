@@ -197,6 +197,114 @@ def _enriched(rows: list[sqlite3.Row]) -> bool:
 
 
 # --------------------------------------------------------------------------------------
+# Linkage check — is each planted incident structurally connectable at all?
+# --------------------------------------------------------------------------------------
+
+# "internal" is not an account. Engineering rows carry it, so treating it as a join key would
+# claim a link between every engineering event and every other engineering event.
+NOT_AN_ACCOUNT = {"internal"}
+
+# payload["text"] is the enriched prose. It is deliberately excluded: a join that only works
+# before enrichment is exactly the defect this check exists to catch.
+NOT_A_JOIN_KEY = {"text"}
+
+
+def _join_values(payload: dict, entity_id: str) -> set[str]:
+    """Structured values an event can be joined on. Prose and numbers are not join keys."""
+    vals = {str(v) for k, v in payload.items()
+            if k not in NOT_A_JOIN_KEY and isinstance(v, str) and len(v) >= 3}
+    if entity_id not in NOT_AN_ACCOUNT:
+        vals.add(entity_id)
+    return vals
+
+
+def linkage(db: Path | None = None) -> dict[str, dict]:
+    """For each planted incident, which stream pairs are connectable and by what value.
+
+    An incident is only findable if its streams form a connected graph. INC-1's engineering hop
+    is entity_id="internal" while its support hop is "acct_03", so those two can only be linked
+    by a shared component value — which is precisely what enrichment destroyed once before.
+    """
+    db = Path(db or C.EVENTS_DB)
+    out: dict[str, dict] = {}
+
+    for key, inc in sorted(GT.load(db).items()):
+        rows = _rows(db,
+                     "SELECT e.* FROM events e JOIN ground_truth g ON g.event_id = e.id"
+                     " WHERE g.incident_id = ?", (key,))
+        by_stream: dict[str, set[str]] = {}
+        for r in rows:
+            by_stream.setdefault(r["stream"], set()).update(
+                _join_values(json.loads(r["payload"]), r["entity_id"]))
+
+        streams = sorted(by_stream)
+        edges: dict[tuple[str, str], list[str]] = {}
+        for i, a in enumerate(streams):
+            for bstream in streams[i + 1:]:
+                shared = sorted(by_stream[a] & by_stream[bstream])
+                if shared:
+                    edges[(a, bstream)] = shared
+
+        # Connectivity: can every stream be reached from the first one?
+        seen = {streams[0]} if streams else set()
+        changed = True
+        while changed:
+            changed = False
+            for (a, bstream) in edges:
+                if a in seen and bstream not in seen:
+                    seen.add(bstream); changed = True
+                elif bstream in seen and a not in seen:
+                    seen.add(a); changed = True
+
+        out[key] = {
+            "is_near_miss": inc.is_near_miss,
+            "streams": streams,
+            "edges": {f"{a} <-> {b}": v for (a, b), v in sorted(edges.items())},
+            "orphans": sorted(set(streams) - seen),
+            "connected": len(streams) > 0 and not (set(streams) - seen),
+        }
+    return out
+
+
+def linkage_report(db: Path | None = None) -> tuple[str, bool]:
+    """Render the linkage table. Returns (text, ok). ok is False if any incident has an orphan."""
+    data = linkage(db)
+    lines = [
+        "LINKAGE CHECK — can each planted incident actually be joined across its streams?",
+        "=" * 100,
+        "An incident whose streams do not form a connected graph is undiscoverable by any method,",
+        "and every recall number that includes it is meaningless. Join keys are structured payload",
+        "values and entity_id. payload['text'] is excluded on purpose: a join that survives only",
+        "until enrichment rewrites the prose is not a join.",
+        "",
+    ]
+    ok = True
+    for key, d in data.items():
+        kind = "NEAR-MISS" if d["is_near_miss"] else "INCIDENT"
+        if d["is_near_miss"]:
+            verdict = "n/a (near-miss)"
+        elif d["connected"]:
+            verdict = "CONNECTED"
+        else:
+            verdict = "*** ORPHANED STREAM ***"
+            ok = False
+        lines.append(f"{kind} {key}   streams={','.join(d['streams'])}   {verdict}")
+        if d["edges"]:
+            for pair, vals in d["edges"].items():
+                shown = ", ".join(vals[:4]) + (" ..." if len(vals) > 4 else "")
+                lines.append(f"    {pair:<28} via  {shown}")
+        else:
+            lines.append("    (no join between any pair)")
+        if d["orphans"] and not d["is_near_miss"]:
+            lines.append(f"    UNREACHABLE: {','.join(d['orphans'])}")
+        lines.append("")
+
+    lines.append("RESULT: " + ("all incidents connected" if ok
+                               else "FAILED — at least one incident has an unreachable stream"))
+    return "\n".join(lines), ok
+
+
+# --------------------------------------------------------------------------------------
 # Review packet
 # --------------------------------------------------------------------------------------
 
@@ -233,6 +341,10 @@ def build_packet(n: int, claim: str, least_confident: list[str],
     (dest / "ruff_output.txt").write_text(_capture(["uv", "run", "ruff", "check"]))
     (dest / "tree.txt").write_text(_tree())
     (dest / "git_log.txt").write_text(_capture(["git", "log", "--oneline", "-20"]))
+    # Every packet carries the linkage check. If an incident stops being joinable, the recall
+    # numbers in that same packet are void, so the two belong in the reviewer's hands together.
+    if C.EVENTS_DB.exists():
+        (dest / "linkage.txt").write_text(linkage_report()[0])
 
     for fname, content in (extra or {}).items():
         (dest / fname).write_text(content)
@@ -252,6 +364,7 @@ def build_packet(n: int, claim: str, least_confident: list[str],
         "dataset_stats.txt": "counts by stream/kind/account, planted detail, determinism check",
         "enrichment_check.txt": "10 noise texts vs 10 incident texts, labels stripped",
         "model_availability.txt": "which config.py model ids are actually callable in this project",
+        "linkage.txt": "proof each planted incident is joinable across its streams post-enrichment",
     }
     sha = _capture(["git", "rev-parse", "--short", "HEAD"]).strip().splitlines()[-1]
 
@@ -270,4 +383,21 @@ def build_packet(n: int, claim: str, least_confident: list[str],
     lines += ["", "## Specific questions for the reviewer"]
     lines += [f"- {q}" for q in questions] or ["- none"]
     (dest / "MANIFEST.md").write_text("\n".join(lines) + "\n")
+    mirror_to_review_artifacts(dest)
     return dest
+
+
+def mirror_to_review_artifacts(packet: Path) -> Path:
+    """Copy a packet flat into review_artifacts/, wiping it first.
+
+    review/checkpoint-N/ is the archive and is never touched again. This folder always holds
+    exactly one checkpoint's worth of files, so the reviewer fetches the same path every time
+    regardless of which checkpoint is current.
+    """
+    flat = C.ROOT / "review_artifacts"
+    shutil.rmtree(flat, ignore_errors=True)
+    flat.mkdir(parents=True, exist_ok=True)
+    for src in sorted(packet.iterdir()):
+        if src.is_file():
+            shutil.copy2(src, flat / src.name)
+    return flat

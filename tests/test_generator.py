@@ -40,9 +40,9 @@ def test_all_four_streams_present(db: Path) -> None:
         assert n >= 50, f"stream {s} only has {n} events"
 
 
-def test_exactly_five_incidents_and_four_near_misses(db: Path) -> None:
+def test_exactly_five_incidents_and_five_near_misses(db: Path) -> None:
     assert len(GT.incidents(db)) == 5
-    assert len(GT.near_misses(db)) == 4
+    assert len(GT.near_misses(db)) == 5
 
 
 # INC-5's support hop is a SILENCE. An absence of tickets has no events of its own, so there is
@@ -72,12 +72,33 @@ def test_only_inc5_relies_on_a_silence_hop(db: Path) -> None:
         )
 
 
-@pytest.mark.parametrize("spec", NEAR_MISSES, ids=lambda s: s["id"])
+SINGLE_STREAM_NEAR_MISSES = [n for n in NEAR_MISSES if n["stream"] != "multi"]
+
+
+@pytest.mark.parametrize("spec", SINGLE_STREAM_NEAR_MISSES, ids=lambda s: s["id"])
 def test_near_miss_is_single_stream(db: Path, spec: dict) -> None:
-    """A near-miss with two sources would be a real incident, and the gate would be right
-    to pass it."""
+    """These four are rejected by sufficiency on structure alone, before confidence matters."""
     streams = GT.near_misses(db)[spec["id"]].streams
     assert streams == {spec["stream"]}, f"{spec['id']} spans {sorted(streams)}"
+
+
+def test_nm5_is_two_stream_so_it_reaches_the_confidence_floor(db: Path) -> None:
+    """NM-5 is the only thing in the corpus that tests the floor.
+
+    The other four near-misses are single-stream, so rule 2 rejects them and the confidence
+    floor never runs. NM-5 passes sufficiency deliberately - two streams, one account, one
+    window, no causal link - so whether the floor catches it is a measured result.
+    """
+    nm5 = GT.near_misses(db)["NM-5"]
+    assert nm5.streams == {"support", "billing"}, f"NM-5 spans {sorted(nm5.streams)}"
+
+    conn = sqlite3.connect(db)
+    rows = conn.execute(
+        "SELECT e.entity_id, e.ts FROM events e JOIN ground_truth g ON g.event_id = e.id"
+        " WHERE g.incident_id = 'NM-5'").fetchall()
+    assert {r[0] for r in rows} == {"acct_10"}, "NM-5 must be one account or it is not tempting"
+    days = {r[1][:10] for r in rows}
+    assert len(days) <= 8, f"NM-5 spread over {len(days)} days; it must look like one window"
 
 
 def test_incident_events_belong_to_the_declared_account(db: Path) -> None:
@@ -117,3 +138,55 @@ def test_ground_truth_is_not_reachable_from_the_events_table(db: Path) -> None:
     """Belt and braces alongside the AST test: no join path exists inside `events` itself."""
     cols = {r[1] for r in sqlite3.connect(db).execute("PRAGMA table_info(events)")}
     assert not any("incident" in c or "truth" in c or "near" in c for c in cols)
+
+
+# --------------------------------------------------------------------------------------
+# Linkage — the check that would have caught the enrichment defect automatically
+# --------------------------------------------------------------------------------------
+
+def test_every_incident_is_structurally_connected(db: Path) -> None:
+    """An incident whose streams cannot be joined is undiscoverable, and scoring it is dishonest.
+
+    This failed for real: enrichment rewrote prose, and INC-1's only engineering-to-support link
+    was the phrase "Atlas" inside a ticket body. Once rewritten, the engineering hop became
+    unreachable by any method. The fix was a structured `component` field; this test is the guard.
+    """
+    from attention_cascade.report import linkage
+
+    for key, d in linkage(db).items():
+        if d["is_near_miss"]:
+            continue
+        assert d["connected"], f"{key} has unreachable stream(s): {d['orphans']}"
+
+
+def test_incident_joins_do_not_depend_on_prose(db: Path) -> None:
+    """The two cross-entity joins must come from structured fields, not from payload['text']."""
+    from attention_cascade.report import linkage
+
+    data = linkage(db)
+    assert "F-Atlas" in data["INC-1"]["edges"]["engineering <-> support"]
+    inc4 = data["INC-4"]["edges"]["engineering <-> support"]
+    assert "integrations" in inc4 and "v3.11" in inc4
+
+
+def test_linkage_detects_an_orphaned_stream(tmp_path: Path) -> None:
+    """Negative control: if the check cannot fail, it proves nothing."""
+    from attention_cascade.report import linkage
+
+    db = tmp_path / "broken.db"
+    generate(db_path=db)
+    conn = sqlite3.connect(db)
+    # Strip the component field that links INC-1's engineering hop to its support hop, exactly
+    # as enrichment did by accident.
+    for eid, payload in conn.execute(
+        "SELECT e.id, e.payload FROM events e JOIN ground_truth g ON g.event_id = e.id"
+        " WHERE g.incident_id = 'INC-1' AND e.stream = 'support'").fetchall():
+        p = json.loads(payload)
+        p.pop("component", None)
+        p["text"] = "redacted"
+        conn.execute("UPDATE events SET payload = ? WHERE id = ?", (json.dumps(p), eid))
+    conn.commit()
+    conn.close()
+
+    assert not linkage(db)["INC-1"]["connected"]
+    assert "engineering" in linkage(db)["INC-1"]["orphans"]

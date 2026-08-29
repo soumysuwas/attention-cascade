@@ -1,0 +1,12 @@
+{
+  "text": "[\n  {\"id\": \"evt_00057\", \"text\": \"Usage snapshot for acct_10 recorded 26,712.5 api_calls during this billing cycle.\"},\n  {\"id\": \"evt_00088\", \"text\": \"Invoice issued to acct_07 for the total amount of $24,202.38 due net 30.\"},\n  {\"id\": \"evt_01005\", \"text\": \"Acct_03 reports a severity 3 issue in webhooks where users keep hitting permission denied errors.\"},\n  {\"id\": \"evt_01036\", \"text\": \"Forecast update for acct_05 bumped the projected deal value up by 14.5% to $355,915.\"},\n  {\"id\": \"evt_01069\", \"text\": \"Support ticket from acct_05 regarding missing data in export on component F-Atlas, sev 3.\"}\n]",
+  "model": "gemini-3.5-flash-lite",
+  "tier": "enrich",
+  "input_tokens": 774,
+  "output_tokens": 225,
+  "thoughts_tokens": 0,
+  "cached_input_tokens": 0,
+  "latency_ms": 1424,
+  "cost_usd": 0.0007947,
+  "long_context": false
+}
