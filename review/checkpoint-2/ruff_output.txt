@@ -1,0 +1,4 @@
+$ uv run ruff check
+(exit 0)
+
+All checks passed!

@@ -1,0 +1,9 @@
+$ git log --oneline -20
+(exit 0)
+
+543390b add tier0 detectors for crm, engineering, support and billing
+d1e4d9f add deterministic attention gate with dedup, sufficiency, floor, cap and displacement
+1b6aa7f restore cross-system joins via component fields, add NM-5 and check-linkage
+1a1ecac refresh checkpoint 1 packet so git_log includes the checkpoint commit
+a5eefaa add groundtruth accessors, cli, dataset tests and checkpoint 1 review packet
+38e77f5 scaffold: spec, checkpoints, generator, metered vertex client

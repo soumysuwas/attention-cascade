@@ -1,0 +1,12 @@
+{
+  "text": "[\n  {\n    \"anomaly_id\": \"anom_bil_0065\",\n    \"plausible\": true,\n    \"reason\": \"Billing plan change on account may indicate churn risk.\",\n    \"business_hint\": \"Account billing alteration\"\n  },\n  {\n    \"anomaly_id\": \"anom_eng_0023\",\n    \"plausible\": true,\n    \"reason\": \"Missed engineering delivery points on billing service.\",\n    \"business_hint\": \"Engineering delivery slip\"\n  },\n  {\n    \"anomaly_id\": \"anom_eng_0026\",\n    \"plausible\": true,\n    \"reason\": \"Missed delivery points for platform team.\",\n    \"business_hint\": \"Platform delivery delay\"\n  },\n  {\n    \"anomaly_id\": \"anom_eng_0027\",\n    \"plausible\": true,\n    \"reason\": \"Repeated missed points on billing-svc delivery.\",\n    \"business_hint\": \"Billing service delay\"\n  },\n  {\n    \"anomaly_id\": \"anom_eng_0028\",\n    \"plausible\": true,\n    \"reason\": \"Ingest pipeline engineering slip.\",\n    \"business_hint\": \"Ingest delivery slip\"\n  },\n  {\n    \"anomaly_id\": \"anom_eng_0029\",\n    \"plausible\": true,\n    \"reason\": \"Integrations engineering delivery slip.\",\n    \"business_hint\": \"Integrations delivery slip\"\n  },\n  {\n    \"anomaly_id\": \"anom_crm_0019\",\n    \"plausible\": true,\n    \"reason\": \"Loss of champion contact threatens account revenue.\",\n    \"business_hint\": \"Lost champion contact\"\n  },\n  {\n    \"anomaly_id\": \"anom_crm_0008\",\n    \"plausible\": true,\n    \"reason\": \"Significant forecast cut on key account.\",\n    \"business_hint\": \"Account forecast reduction\"\n  },\n  {\n    \"anomaly_id\": \"anom_crm_0005\",\n    \"plausible\": true,\n    \"reason\": \"Substantial forecast reduction for acct_03.\",\n    \"business_hint\": \"Revenue forecast drop\"\n  },\n  {\n    \"anomaly_id\": \"anom_crm_0010\",\n    \"plausible\": true,\n    \"reason\": \"Forecast cut indicates potential deal risk.\",\n    \"business_hint\": \"Deal forecast reduction\"\n  }\n]",
+  "model": "gemini-3.5-flash-lite",
+  "tier": "tier1",
+  "input_tokens": 1072,
+  "output_tokens": 587,
+  "thoughts_tokens": 0,
+  "cached_input_tokens": 0,
+  "latency_ms": 2532,
+  "cost_usd": 0.0017890999999999998,
+  "long_context": false
+}

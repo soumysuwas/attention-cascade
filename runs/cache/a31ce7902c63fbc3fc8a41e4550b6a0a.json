@@ -1,0 +1,12 @@
+{
+  "text": "[\n  {\n    \"anomaly_id\": \"anom_crm_0006\",\n    \"plausible\": true,\n    \"reason\": \"Deal stage stalled for 44 days, risking pipeline conversion.\",\n    \"business_hint\": \"Review sales pipeline blockage for acct_04.\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0048\",\n    \"plausible\": true,\n    \"reason\": \"Support ticket volume spike involving sso-auth and data-export.\",\n    \"business_hint\": \"Investigate technical friction for acct_04.\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0049\",\n    \"plausible\": true,\n    \"reason\": \"Recurring ticket volume spike for acct_04.\",\n    \"business_hint\": \"Check ongoing support issues for acct_04.\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0050\",\n    \"plausible\": true,\n    \"reason\": \"Continued ticket volume spikes indicating customer friction.\",\n    \"business_hint\": \"Evaluate product usability for acct_04.\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0051\",\n    \"plausible\": true,\n    \"reason\": \"Repeated support ticket spikes involving sso-auth and integrations.\",\n    \"business_hint\": \"Address integration and auth issues for acct_04.\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0039\",\n    \"plausible\": true,\n    \"reason\": \"Multiple sev-1 tickets raised in a short window.\",\n    \"business_hint\": \"Escalate critical customer issues for acct_02.\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0065\",\n    \"plausible\": true,\n    \"reason\": \"Multiple sev-1 tickets for sso-auth indicate severe impact.\",\n    \"business_hint\": \"Address auth failures for acct_11 immediately.\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0066\",\n    \"plausible\": true,\n    \"reason\": \"Sudden drop in ticket volume after high activity.\",\n    \"business_hint\": \"Check churn risk or satisfaction shift for acct_11.\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0052\",\n    \"plausible\": true,\n    \"reason\": \"Support ticket volume spike for acct_05.\",\n    \"business_hint\": \"Review ingest-api and webhook issues for acct_05.\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0053\",\n    \"plausible\": true,\n    \"reason\": \"Support ticket volume spike including billing-portal.\",\n    \"business_hint\": \"Check billing and export issues for acct_05.\"\n  }\n]",
+  "model": "gemini-3.5-flash-lite",
+  "tier": "tier1",
+  "input_tokens": 1295,
+  "output_tokens": 694,
+  "thoughts_tokens": 0,
+  "cached_input_tokens": 0,
+  "latency_ms": 17820,
+  "cost_usd": 0.0021235,
+  "long_context": false
+}

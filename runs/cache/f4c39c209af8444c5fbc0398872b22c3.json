@@ -1,0 +1,12 @@
+{
+  "text": "[\n  {\n    \"title\": \"F-Atlas migration delays caused major forecast drop\",\n    \"narrative\": \"The client repeatedly expressed frustration over F-Atlas migration delays and webhook errors in late June and early July. This poor technical experience directly preceded a 40% reduction in their CRM forecast, indicating high commercial risk.\",\n    \"entity_id\": \"acct_03\",\n    \"evidence\": [\n      {\n        \"event_id\": \"evt_00502\",\n        \"stream\": \"support\",\n        \"anomaly_id\": \"anom_sup_0042\"\n      },\n      {\n        \"event_id\": \"evt_00533\",\n        \"stream\": \"support\",\n        \"anomaly_id\": \"anom_sup_0043\"\n      },\n      {\n        \"event_id\": \"evt_00630\",\n        \"stream\": \"crm\",\n        \"anomaly_id\": \"anom_crm_0005\"\n      }\n    ],\n    \"impact\": 0.85,\n    \"confidence\": 0.90\n  },\n  {\n    \"title\": \"Champion departure led to platform abandonment\",\n    \"narrative\": \"A key champion contact departed the organization, which was immediately followed by a complete cessation of support tickets. This indicates the account has likely abandoned the platform, posing a severe churn risk.\",\n    \"entity_id\": \"acct_11\",\n    \"evidence\": [\n      {\n        \"event_id\": \"evt_00149\",\n        \"stream\": \"crm\",\n        \"anomaly_id\": \"anom_crm_0019\"\n      },\n      {\n        \"event_id\": \"evt_00202\",\n        \"stream\": \"support\",\n        \"anomaly_id\": \"anom_sup_0062\"\n      },\n      {\n        \"event_id\": \"evt_00214\",\n        \"stream\": \"support\",\n        \"anomaly_id\": \"anom_sup_0062\"\n      }\n    ],\n    \"impact\": 0.90,\n    \"confidence\": 0.95\n  }\n]",
+  "model": "gemini-3.1-pro-preview",
+  "tier": "tier2",
+  "input_tokens": 5798,
+  "output_tokens": 513,
+  "thoughts_tokens": 960,
+  "cached_input_tokens": 0,
+  "latency_ms": 12183,
+  "cost_usd": 0.029272,
+  "long_context": false
+}

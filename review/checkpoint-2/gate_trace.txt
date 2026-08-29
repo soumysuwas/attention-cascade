@@ -1,0 +1,13 @@
+GATE TRACE — every hypothesis and why it did or did not get an attention slot
+====================================================================================================
+cap=7  min_sources=2  min_confidence=0.55
+duplicate evidence refs dropped: 0
+
+  ESCALATED #1  hyp_001  impact=0.85 conf=0.95 priority=0.807 streams=crm,engineering,support
+      F-Atlas delivery slips caused Account 03 deal regression
+  ESCALATED #2  hyp_003  impact=0.80 conf=0.90 priority=0.720 streams=billing,crm,support
+      Ingest API instability drove Account 07 usage collapse post-sale
+  ESCALATED #3  hyp_002  impact=0.75 conf=0.90 priority=0.675 streams=billing,crm,support
+      Forced metered billing migration triggered Account 05 churn risk
+  ESCALATED #4  hyp_004  impact=0.60 conf=0.85 priority=0.510 streams=billing,crm,support
+      Champion departure caused Account 11 engagement and usage drop

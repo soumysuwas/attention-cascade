@@ -1,0 +1,12 @@
+{
+  "text": "[\n  {\n    \"anomaly_id\": \"anom_bil_0068\",\n    \"plausible\": true,\n    \"reason\": \"Significant usage drop may indicate churn risk.\",\n    \"business_hint\": \"Account usage drop\"\n  },\n  {\n    \"anomaly_id\": \"anom_bil_0073\",\n    \"plausible\": true,\n    \"reason\": \"Usage drop combined with forecast cuts suggests churn.\",\n    \"business_hint\": \"Account usage drop\"\n  },\n  {\n    \"anomaly_id\": \"anom_crm_0015\",\n    \"plausible\": true,\n    \"reason\": \"Forecast cut for key account requires attention.\",\n    \"business_hint\": \"Sales forecast reduction\"\n  },\n  {\n    \"anomaly_id\": \"anom_crm_0002\",\n    \"plausible\": true,\n    \"reason\": \"Pipeline reduction warrants sales manager review.\",\n    \"business_hint\": \"Sales forecast reduction\"\n  },\n  {\n    \"anomaly_id\": \"anom_crm_0014\",\n    \"plausible\": true,\n    \"reason\": \"Pipeline reduction for account needs monitoring.\",\n    \"business_hint\": \"Sales forecast reduction\"\n  }\n]",
+  "model": "gemini-3.5-flash-lite",
+  "tier": "tier1",
+  "input_tokens": 665,
+  "output_tokens": 292,
+  "thoughts_tokens": 0,
+  "cached_input_tokens": 0,
+  "latency_ms": 1687,
+  "cost_usd": 0.0009295,
+  "long_context": false
+}

@@ -1,0 +1,102 @@
+[
+  {
+    "id": "hyp_001",
+    "title": "F-Atlas delivery slips caused Account 03 deal regression",
+    "narrative": "Engineering repeatedly missed milestones for the F-Atlas feature. This directly blocked Account 03's migration, leading to a flood of support tickets and ultimately causing their deal to regress to evaluation with a 40% forecast cut.",
+    "entity_id": "acct_03",
+    "evidence": [
+      {
+        "event_id": "evt_00397",
+        "stream": "engineering",
+        "anomaly_id": "anom_eng_0022"
+      },
+      {
+        "event_id": "evt_00508",
+        "stream": "support",
+        "anomaly_id": "anom_sup_0044"
+      },
+      {
+        "event_id": "evt_00626",
+        "stream": "crm",
+        "anomaly_id": "anom_crm_0005"
+      }
+    ],
+    "impact": 0.85,
+    "confidence": 0.95
+  },
+  {
+    "id": "hyp_002",
+    "title": "Forced metered billing migration triggered Account 05 churn risk",
+    "narrative": "Account 05 was forced onto a usage-metered plan, which immediately triggered a billing dispute in support. Consequently, the CRM forecast was cut by 45% due to pricing-related renewal risks.",
+    "entity_id": "acct_05",
+    "evidence": [
+      {
+        "event_id": "evt_00234",
+        "stream": "billing",
+        "anomaly_id": "anom_bil_0070"
+      },
+      {
+        "event_id": "evt_00289",
+        "stream": "support",
+        "anomaly_id": "anom_sup_0053"
+      },
+      {
+        "event_id": "evt_00447",
+        "stream": "crm",
+        "anomaly_id": "anom_crm_0008"
+      }
+    ],
+    "impact": 0.75,
+    "confidence": 0.9
+  },
+  {
+    "id": "hyp_003",
+    "title": "Ingest API instability drove Account 07 usage collapse post-sale",
+    "narrative": "Shortly after Account 07's deal was marked closed-won, they experienced severe Ingest API outages resulting in multiple Sev-1 tickets. This technical failure caused their API usage to plummet by 59%.",
+    "entity_id": "acct_07",
+    "evidence": [
+      {
+        "event_id": "evt_00402",
+        "stream": "crm",
+        "anomaly_id": "anom_crm_0012"
+      },
+      {
+        "event_id": "evt_00584",
+        "stream": "support",
+        "anomaly_id": "anom_sup_0059"
+      },
+      {
+        "event_id": "evt_00595",
+        "stream": "billing",
+        "anomaly_id": "anom_bil_0072"
+      }
+    ],
+    "impact": 0.8,
+    "confidence": 0.9
+  },
+  {
+    "id": "hyp_004",
+    "title": "Champion departure caused Account 11 engagement and usage drop",
+    "narrative": "The primary champion at Account 11 left the company, leading to an immediate cessation of support tickets. Without their champion driving adoption, API usage steadily declined by 26% over the following weeks.",
+    "entity_id": "acct_11",
+    "evidence": [
+      {
+        "event_id": "evt_00149",
+        "stream": "crm",
+        "anomaly_id": "anom_crm_0019"
+      },
+      {
+        "event_id": "evt_00202",
+        "stream": "support",
+        "anomaly_id": "anom_sup_0066"
+      },
+      {
+        "event_id": "evt_00495",
+        "stream": "billing",
+        "anomaly_id": "anom_bil_0075"
+      }
+    ],
+    "impact": 0.6,
+    "confidence": 0.85
+  }
+]

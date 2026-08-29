@@ -1,0 +1,12 @@
+{
+  "text": "[\n  {\n    \"anomaly_id\": \"anom_eng_0025\",\n    \"plausible\": true,\n    \"reason\": \"Ingest delivery slips indicate ongoing project velocity delays.\",\n    \"business_hint\": \"Review engineering capacity and delivery milestones.\"\n  },\n  {\n    \"anomaly_id\": \"anom_eng_0021\",\n    \"plausible\": true,\n    \"reason\": \"Platform delivery slip on F-Atlas impacts release timelines.\",\n    \"business_hint\": \"Check product roadmap timeline risks.\"\n  },\n  {\n    \"anomaly_id\": \"anom_eng_0024\",\n    \"plausible\": true,\n    \"reason\": \"Repeated ingest delivery slips suggest chronic resource constraints.\",\n    \"business_hint\": \"Evaluate engineering resource allocation.\"\n  },\n  {\n    \"anomaly_id\": \"anom_crm_0013\",\n    \"plausible\": true,\n    \"reason\": \"High-value account stalled in CRM stage for 51 days.\",\n    \"business_hint\": \"Investigate deal blockage with sales lead.\"\n  },\n  {\n    \"anomaly_id\": \"anom_eng_0020\",\n    \"plausible\": true,\n    \"reason\": \"Platform delivery slip points to repeated project delays.\",\n    \"business_hint\": \"Monitor engineering delivery risks.\"\n  },\n  {\n    \"anomaly_id\": \"anom_eng_0030\",\n    \"plausible\": true,\n    \"reason\": \"Spike in reopened bugs indicates potential quality issues.\",\n    \"business_hint\": \"Assess platform code quality.\"\n  },\n  {\n    \"anomaly_id\": \"anom_eng_0031\",\n    \"plausible\": true,\n    \"reason\": \"Multiple teams experiencing bug reopen spikes.\",\n    \"business_hint\": \"Check testing standards and regression rates.\"\n  },\n  {\n    \"anomaly_id\": \"anom_eng_0032\",\n    \"plausible\": true,\n    \"reason\": \"Billing service and integration teams reporting quality dips.\",\n    \"business_hint\": \"Review billing software quality.\"\n  },\n  {\n    \"anomaly_id\": \"anom_eng_0033\",\n    \"plausible\": true,\n    \"reason\": \"Integrations team bug reopen spike impacts reliability.\",\n    \"business_hint\": \"Assess integration stability.\"\n  },\n  {\n    \"anomaly_id\": \"anom_eng_0034\",\n    \"plausible\": true,\n    \"reason\": \"Recurring reopen spikes across core product teams.\",\n    \"business_hint\": \"Investigate QA processes across engineering.\"\n  }\n]",
+  "model": "gemini-3.5-flash-lite",
+  "tier": "tier1",
+  "input_tokens": 1154,
+  "output_tokens": 619,
+  "thoughts_tokens": 0,
+  "cached_input_tokens": 0,
+  "latency_ms": 4678,
+  "cost_usd": 0.0018937,
+  "long_context": false
+}

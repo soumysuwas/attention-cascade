@@ -1,0 +1,12 @@
+{
+  "text": "[\n  {\n    \"title\": \"F-Atlas delivery slips cause customer frustration\",\n    \"narrative\": \"Engineering delivery slips on the F-Atlas feature directly led to support escalations from acct_03. The customer is blocked on their migration and demanding revised ETAs, risking account health and future expansion.\",\n    \"entity_id\": \"acct_03\",\n    \"evidence\": [\n      {\n        \"event_id\": \"evt_00399\",\n        \"stream\": \"engineering\",\n        \"anomaly_id\": \"anom_eng_0022\"\n      },\n      {\n        \"event_id\": \"evt_00453\",\n        \"stream\": \"support\",\n        \"anomaly_id\": \"anom_sup_0040\"\n      },\n      {\n        \"event_id\": \"evt_00474\",\n        \"stream\": \"support\",\n        \"anomaly_id\": \"anom_sup_0041\"\n      }\n    ],\n    \"impact\": 0.7,\n    \"confidence\": 0.9\n  },\n  {\n    \"title\": \"Ingest team delivery issues precede critical API outages\",\n    \"narrative\": \"The ingest team missed sprint deliverables due to blockers, which was followed shortly by severe ingest-api outages for acct_07. This suggests underlying instability in the ingest service that is causing critical production failures for customers.\",\n    \"entity_id\": \"acct_07\",\n    \"evidence\": [\n      {\n        \"event_id\": \"evt_00512\",\n        \"stream\": \"engineering\",\n        \"anomaly_id\": \"anom_eng_0025\"\n      },\n      {\n        \"event_id\": \"evt_00539\",\n        \"stream\": \"support\",\n        \"anomaly_id\": \"anom_sup_0057\"\n      },\n      {\n        \"event_id\": \"evt_00595\",\n        \"stream\": \"support\",\n        \"anomaly_id\": \"anom_sup_0056\"\n      }\n    ],\n    \"impact\": 0.85,\n    \"confidence\": 0.8\n  }\n]",
+  "model": "gemini-3.1-pro-preview",
+  "tier": "tier2",
+  "input_tokens": 6861,
+  "output_tokens": 519,
+  "thoughts_tokens": 1720,
+  "cached_input_tokens": 0,
+  "latency_ms": 19388,
+  "cost_usd": 0.04059,
+  "long_context": false
+}

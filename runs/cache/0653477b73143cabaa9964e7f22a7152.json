@@ -1,0 +1,12 @@
+{
+  "text": "[\n  {\n    \"anomaly_id\": \"anom_sup_0041\",\n    \"plausible\": true,\n    \"reason\": \"Sustained support ticket volume spike from acct_03.\",\n    \"business_hint\": \"Potential churn risk or integration issues.\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0042\",\n    \"plausible\": true,\n    \"reason\": \"Continued support ticket spikes indicating ongoing issues.\",\n    \"business_hint\": \"Monitor client health for account acct_03.\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0043\",\n    \"plausible\": true,\n    \"reason\": \"Persistent ticket volume increases across multiple components.\",\n    \"business_hint\": \"Investigate recurring technical friction for acct_03.\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0044\",\n    \"plausible\": true,\n    \"reason\": \"Recurring daily ticket spike from key account.\",\n    \"business_hint\": \"Check webhook reliability and client satisfaction.\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0045\",\n    \"plausible\": true,\n    \"reason\": \"Consistent high volume of support inquiries.\",\n    \"business_hint\": \"API ingest issues affecting acct_03.\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0046\",\n    \"plausible\": true,\n    \"reason\": \"Another recurrence of ticket volume anomaly.\",\n    \"business_hint\": \"Reporting and webhook failures for acct_03.\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0047\",\n    \"plausible\": true,\n    \"reason\": \"Ongoing support load from single account.\",\n    \"business_hint\": \"Persistent integration problems require account management.\"\n  },\n  {\n    \"anomaly_id\": \"anom_crm_0003\",\n    \"plausible\": true,\n    \"reason\": \"Deal stage stalled for 37 days.\",\n    \"business_hint\": \"Sales pipeline bottleneck for acct_02.\"\n  },\n  {\n    \"anomaly_id\": \"anom_crm_0001\",\n    \"plausible\": true,\n    \"reason\": \"Deal stage stalled for 33 days.\",\n    \"business_hint\": \"Sales velocity risk for acct_01.\"\n  },\n  {\n    \"anomaly_id\": \"anom_crm_0012\",\n    \"plausible\": true,\n    \"reason\": \"Deal stage stalled for 33 days.\",\n    \"business_hint\": \"Pipeline stagnation for acct_07.\"\n  }\n]",
+  "model": "gemini-3.5-flash-lite",
+  "tier": "tier1",
+  "input_tokens": 1287,
+  "output_tokens": 643,
+  "thoughts_tokens": 0,
+  "cached_input_tokens": 0,
+  "latency_ms": 2681,
+  "cost_usd": 0.0019936,
+  "long_context": false
+}

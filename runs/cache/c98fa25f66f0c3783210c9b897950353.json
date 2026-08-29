@@ -1,0 +1,12 @@
+{
+  "text": "[\n  {\n    \"anomaly_id\": \"anom_crm_0009\",\n    \"plausible\": true,\n    \"reason\": \"Deal stalled significantly longer than threshold, risking pipeline conversion.\",\n    \"business_hint\": \"Sales pipeline delay\"\n  },\n  {\n    \"anomaly_id\": \"anom_crm_0004\",\n    \"plausible\": true,\n    \"reason\": \"Deal stalled in pipeline for 26 days.\",\n    \"business_hint\": \"Sales pipeline delay\"\n  },\n  {\n    \"anomaly_id\": \"anom_crm_0018\",\n    \"plausible\": true,\n    \"reason\": \"Account deal stage prolonged.\",\n    \"business_hint\": \"Sales pipeline delay\"\n  },\n  {\n    \"anomaly_id\": \"anom_crm_0017\",\n    \"plausible\": true,\n    \"reason\": \"Deal stage duration exceeded threshold.\",\n    \"business_hint\": \"Sales pipeline delay\"\n  },\n  {\n    \"anomaly_id\": \"anom_bil_0070\",\n    \"plausible\": true,\n    \"reason\": \"Billing change event could impact revenue.\",\n    \"business_hint\": \"Billing modification risk\"\n  },\n  {\n    \"anomaly_id\": \"anom_eng_0023\",\n    \"plausible\": true,\n    \"reason\": \"Engineering team missed sprint delivery points.\",\n    \"business_hint\": \"Sprint velocity drop\"\n  },\n  {\n    \"anomaly_id\": \"anom_eng_0026\",\n    \"plausible\": true,\n    \"reason\": \"Platform team missed delivery points.\",\n    \"business_hint\": \"Sprint velocity drop\"\n  },\n  {\n    \"anomaly_id\": \"anom_eng_0027\",\n    \"plausible\": true,\n    \"reason\": \"Billing service missed delivery points.\",\n    \"business_hint\": \"Sprint velocity drop\"\n  },\n  {\n    \"anomaly_id\": \"anom_eng_0028\",\n    \"plausible\": true,\n    \"reason\": \"Ingest team missed delivery points.\",\n    \"business_hint\": \"Sprint velocity drop\"\n  },\n  {\n    \"anomaly_id\": \"anom_eng_0029\",\n    \"plausible\": true,\n    \"reason\": \"Integrations team missed delivery points.\",\n    \"business_hint\": \"Sprint velocity drop\"\n  }\n]",
+  "model": "gemini-3.5-flash-lite",
+  "tier": "tier1",
+  "input_tokens": 1109,
+  "output_tokens": 575,
+  "thoughts_tokens": 0,
+  "cached_input_tokens": 0,
+  "latency_ms": 2280,
+  "cost_usd": 0.0017702,
+  "long_context": false
+}

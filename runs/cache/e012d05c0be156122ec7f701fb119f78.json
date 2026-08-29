@@ -1,0 +1,12 @@
+{
+  "text": "[\n  {\n    \"title\": \"F-Atlas delivery slips cause acct_03 forecast drop\",\n    \"narrative\": \"Engineering repeatedly missed delivery targets for the F-Atlas feature. This blocked acct_03's migration plans, leading to a severe 40% reduction in their CRM forecast due to budget freeze discussions.\",\n    \"entity_id\": \"acct_03\",\n    \"evidence\": [\n      {\n        \"event_id\": \"evt_00399\",\n        \"stream\": \"engineering\",\n        \"anomaly_id\": \"anom_eng_0022\"\n      },\n      {\n        \"event_id\": \"evt_00474\",\n        \"stream\": \"support\",\n        \"anomaly_id\": \"anom_sup_0041\"\n      },\n      {\n        \"event_id\": \"evt_00630\",\n        \"stream\": \"crm\",\n        \"anomaly_id\": \"anom_crm_0005\"\n      }\n    ],\n    \"impact\": 0.85,\n    \"confidence\": 0.95\n  },\n  {\n    \"title\": \"Ingest-API outages drive acct_07 usage collapse\",\n    \"narrative\": \"A cluster of critical Sev-1 support tickets regarding ingest-api being completely down correlates directly with a 25% drop in API usage. This indicates the technical outage directly impacted billable consumption.\",\n    \"entity_id\": \"acct_07\",\n    \"evidence\": [\n      {\n        \"event_id\": \"evt_00539\",\n        \"stream\": \"support\",\n        \"anomaly_id\": \"anom_sup_0057\"\n      },\n      {\n        \"event_id\": \"evt_00599\",\n        \"stream\": \"billing\",\n        \"anomaly_id\": \"anom_bil_0066\"\n      }\n    ],\n    \"impact\": 0.75,\n    \"confidence\": 0.90\n  },\n  {\n    \"title\": \"Champion departure leads to acct_11 engagement silence\",\n    \"narrative\": \"The departure of a key champion contact in CRM immediately preceded a 19-day period of zero support tickets from acct_11. This sudden drop in engagement signals a high churn risk.\",\n    \"entity_id\": \"acct_11\",\n    \"evidence\": [\n      {\n        \"event_id\": \"evt_00149\",\n        \"stream\": \"crm\",\n        \"anomaly_id\": \"anom_crm_0019\"\n      },\n      {\n        \"event_id\": \"evt_00202\",\n        \"stream\": \"support\",\n        \"anomaly_id\": \"anom_sup_0062\"\n      }\n    ],\n    \"impact\": 0.80,\n    \"confidence\": 0.85\n  }\n]",
+  "model": "gemini-3.1-pro-preview",
+  "tier": "tier2",
+  "input_tokens": 12373,
+  "output_tokens": 691,
+  "thoughts_tokens": 1053,
+  "cached_input_tokens": 0,
+  "latency_ms": 14778,
+  "cost_usd": 0.045674000000000006,
+  "long_context": false
+}

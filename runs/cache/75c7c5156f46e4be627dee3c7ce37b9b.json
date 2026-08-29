@@ -1,0 +1,12 @@
+{
+  "text": "[\n  {\n    \"anomaly_id\": \"anom_sup_0060\",\n    \"plausible\": true,\n    \"reason\": \"Ticket spike with SSO and reporting issues for an account.\",\n    \"business_hint\": \"Check account health and support satisfaction.\"\n  },\n  {\n    \"anomaly_id\": \"anom_crm_0006\",\n    \"plausible\": true,\n    \"reason\": \"Deal stage stalled for an extended period.\",\n    \"business_hint\": \"Review pipeline and engage sales lead.\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0046\",\n    \"plausible\": true,\n    \"reason\": \"Support ticket volume spike involving SSO.\",\n    \"business_hint\": \"Monitor customer onboarding and technical blocks.\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0047\",\n    \"plausible\": true,\n    \"reason\": \"Recurring ticket volume spike for account.\",\n    \"business_hint\": \"Check for persistent product usage issues.\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0048\",\n    \"plausible\": true,\n    \"reason\": \"Repeated support ticket volume spikes.\",\n    \"business_hint\": \"Investigate underlying reporting product stability.\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0049\",\n    \"plausible\": true,\n    \"reason\": \"Ticket volume spike including SSO components.\",\n    \"business_hint\": \"Verify authentication setup for account.\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0039\",\n    \"plausible\": true,\n    \"reason\": \"Multiple high severity tickets raised quickly.\",\n    \"business_hint\": \"Escalate to account manager and technical lead.\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0061\",\n    \"plausible\": true,\n    \"reason\": \"Multiple sev-1 tickets regarding SSO authentication.\",\n    \"business_hint\": \"Critical authentication risk for key account.\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0040\",\n    \"plausible\": true,\n    \"reason\": \"Support ticket volume spike on core components.\",\n    \"business_hint\": \"Review integration stability.\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0041\",\n    \"plausible\": true,\n    \"reason\": \"Consecutive daily ticket volume spikes.\",\n    \"business_hint\": \"Evaluate customer frustration and churn risk.\"\n  }\n]",
+  "model": "gemini-3.5-flash-lite",
+  "tier": "tier1",
+  "input_tokens": 1301,
+  "output_tokens": 609,
+  "thoughts_tokens": 0,
+  "cached_input_tokens": 0,
+  "latency_ms": 4625,
+  "cost_usd": 0.0019128,
+  "long_context": false
+}

@@ -1,0 +1,12 @@
+{
+  "text": "[\n  {\n    \"anomaly_id\": \"anom_sup_0042\",\n    \"plausible\": true,\n    \"reason\": \"Repeated support ticket spikes indicate persistent client friction.\",\n    \"business_hint\": \"Monitor account health for churn risks.\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0043\",\n    \"plausible\": true,\n    \"reason\": \"Ongoing support volume increases suggest systemic product issues.\",\n    \"business_hint\": \"Check integration reliability for acct_03.\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0044\",\n    \"plausible\": true,\n    \"reason\": \"Continued ticket spikes indicate ongoing dissatisfaction.\",\n    \"business_hint\": \"Customer success outreach recommended.\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0045\",\n    \"plausible\": true,\n    \"reason\": \"Recurring spikes point to unresolved technical hurdles.\",\n    \"business_hint\": \"Review webhooks and ingest APIs.\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0062\",\n    \"plausible\": true,\n    \"reason\": \"Sudden ticket silence after high volume could signal churn.\",\n    \"business_hint\": \"Assess engagement drop for acct_11.\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0050\",\n    \"plausible\": false,\n    \"reason\": \"Low volume ticket fluctuation is routine support activity.\",\n    \"business_hint\": \"Ignore routine ticket variance.\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0051\",\n    \"plausible\": false,\n    \"reason\": \"Minor ticket increase is within normal operational variance.\",\n    \"business_hint\": \"No action needed.\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0052\",\n    \"plausible\": false,\n    \"reason\": \"Small number of tickets is statistically insignificant.\",\n    \"business_hint\": \"Standard support handling.\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0053\",\n    \"plausible\": false,\n    \"reason\": \"Routine support inquiries do not require management attention.\",\n    \"business_hint\": \"Standard support follow-up.\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0054\",\n    \"plausible\": false,\n    \"reason\": \"Low-frequency ticket bumps are common operational noise.\",\n    \"business_hint\": \"No business escalation needed.\"\n  }\n]",
+  "model": "gemini-3.5-flash-lite",
+  "tier": "tier1",
+  "input_tokens": 1351,
+  "output_tokens": 616,
+  "thoughts_tokens": 0,
+  "cached_input_tokens": 0,
+  "latency_ms": 2641,
+  "cost_usd": 0.0019453,
+  "long_context": false
+}

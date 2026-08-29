@@ -1,0 +1,42 @@
+LINKAGE CHECK — can each planted incident actually be joined across its streams?
+====================================================================================================
+An incident whose streams do not form a connected graph is undiscoverable by any method,
+and every recall number that includes it is meaningless. Join keys are structured payload
+values and entity_id. payload['text'] is excluded on purpose: a join that survives only
+until enrichment rewrites the prose is not a join.
+
+INCIDENT INC-1   streams=crm,engineering,support   CONNECTED
+    crm <-> support              via  acct_03
+    engineering <-> support      via  F-Atlas
+
+INCIDENT INC-2   streams=billing,support   CONNECTED
+    billing <-> support          via  acct_07
+
+INCIDENT INC-3   streams=billing,crm,support   CONNECTED
+    billing <-> crm              via  acct_05
+    billing <-> support          via  acct_05
+    crm <-> support              via  acct_05
+
+INCIDENT INC-4   streams=billing,engineering,support   CONNECTED
+    billing <-> support          via  acct_09
+    engineering <-> support      via  integrations, v3.11
+
+INCIDENT INC-5   streams=billing,crm   CONNECTED
+    billing <-> crm              via  acct_11
+
+NEAR-MISS NM-1   streams=support   n/a (near-miss)
+    (no join between any pair)
+
+NEAR-MISS NM-2   streams=billing   n/a (near-miss)
+    (no join between any pair)
+
+NEAR-MISS NM-3   streams=engineering   n/a (near-miss)
+    (no join between any pair)
+
+NEAR-MISS NM-4   streams=crm   n/a (near-miss)
+    (no join between any pair)
+
+NEAR-MISS NM-5   streams=billing,support   n/a (near-miss)
+    billing <-> support          via  acct_10
+
+RESULT: all incidents connected

@@ -1,0 +1,10 @@
+id,run_id,arm,tier,model,input_tokens,output_tokens,thinking_tokens,cached_input_tokens,from_cache,latency_ms,cost_usd,ts
+1,cascade-cp2,cascade,tier1,gemini-3.5-flash-lite,1314,632,0,0,1,20105,0.0019741999999999997,2026-08-29T11:30:10.760844+00:00
+2,cascade-cp2,cascade,tier1,gemini-3.5-flash-lite,1154,619,0,0,1,4678,0.0018937,2026-08-29T11:30:10.763518+00:00
+3,cascade-cp2,cascade,tier1,gemini-3.5-flash-lite,1295,694,0,0,1,17820,0.0021235,2026-08-29T11:30:10.766242+00:00
+4,cascade-cp2,cascade,tier1,gemini-3.5-flash-lite,1308,616,0,0,1,17877,0.0019324000000000001,2026-08-29T11:30:10.768982+00:00
+5,cascade-cp2,cascade,tier1,gemini-3.5-flash-lite,1287,643,0,0,1,2681,0.0019936,2026-08-29T11:30:10.773202+00:00
+6,cascade-cp2,cascade,tier1,gemini-3.5-flash-lite,1109,575,0,0,1,2280,0.0017702,2026-08-29T11:30:10.777404+00:00
+7,cascade-cp2,cascade,tier1,gemini-3.5-flash-lite,1191,621,0,0,1,2590,0.0019098000000000001,2026-08-29T11:30:10.780164+00:00
+8,cascade-cp2,cascade,tier1,gemini-3.5-flash-lite,665,292,0,0,1,1687,0.0009295,2026-08-29T11:30:10.784483+00:00
+9,cascade-cp2,cascade,tier2,gemini-3.1-pro-preview,15597,1061,2109,0,1,22098,0.069234,2026-08-29T11:30:10.813263+00:00

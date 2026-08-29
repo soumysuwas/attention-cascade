@@ -1,0 +1,12 @@
+{
+  "text": "[\n  {\n    \"anomaly_id\": \"anom_sup_0055\",\n    \"plausible\": true,\n    \"reason\": \"Support ticket volume spike for account 05 combined with deal stall.\",\n    \"business_hint\": \"Check account health and support issues.\"\n  },\n  {\n    \"anomaly_id\": \"anom_crm_0007\",\n    \"plausible\": true,\n    \"reason\": \"Deal stage stalled for 39 days on account 05.\",\n    \"business_hint\": \"Review pipeline velocity for account 05.\"\n  },\n  {\n    \"anomaly_id\": \"anom_crm_0016\",\n    \"plausible\": true,\n    \"reason\": \"Deal stage stalled for 39 days.\",\n    \"business_hint\": \"Review sales pipeline bottlenecks.\"\n  },\n  {\n    \"anomaly_id\": \"anom_crm_0003\",\n    \"plausible\": true,\n    \"reason\": \"Deal stage stalled for 37 days.\",\n    \"business_hint\": \"Unblock stagnant sales deal.\"\n  },\n  {\n    \"anomaly_id\": \"anom_crm_0001\",\n    \"plausible\": false,\n    \"reason\": \"Minor deal stage stall.\",\n    \"business_hint\": \"Routine sales monitoring\"\n  },\n  {\n    \"anomaly_id\": \"anom_crm_0012\",\n    \"plausible\": false,\n    \"reason\": \"Minor deal stage stall.\",\n    \"business_hint\": \"Routine sales monitoring\"\n  },\n  {\n    \"anomaly_id\": \"anom_crm_0009\",\n    \"plausible\": false,\n    \"reason\": \"Minor deal stage stall.\",\n    \"business_hint\": \"Routine sales monitoring\"\n  },\n  {\n    \"anomaly_id\": \"anom_crm_0004\",\n    \"plausible\": false,\n    \"reason\": \"Minor deal stage stall.\",\n    \"business_hint\": \"Routine sales monitoring\"\n  },\n  {\n    \"anomaly_id\": \"anom_crm_0018\",\n    \"plausible\": false,\n    \"reason\": \"Minor deal stage stall.\",\n    \"business_hint\": \"Routine sales monitoring\"\n  },\n  {\n    \"anomaly_id\": \"anom_crm_0017\",\n    \"plausible\": false,\n    \"reason\": \"Minor deal stage stall.\",\n    \"business_hint\": \"Routine sales monitoring\"\n  }\n]",
+  "model": "gemini-3.5-flash-lite",
+  "tier": "tier1",
+  "input_tokens": 1154,
+  "output_tokens": 590,
+  "thoughts_tokens": 0,
+  "cached_input_tokens": 0,
+  "latency_ms": 2325,
+  "cost_usd": 0.0018212000000000002,
+  "long_context": false
+}

@@ -52,3 +52,31 @@ def test_events_table_has_no_incident_column(tmp_path: Path) -> None:
     cols = {r[1] for r in sqlite3.connect(db).execute("PRAGMA table_info(events)")}
     assert "incident_id" not in cols
     assert cols == {"id", "ts", "stream", "entity_id", "kind", "numeric", "payload"}
+
+
+# --------------------------------------------------------------------------------------
+# Metering quarantine: the same idea as the ground-truth quarantine, applied to spend.
+# --------------------------------------------------------------------------------------
+
+def test_only_llm_py_imports_the_vendor_sdk() -> None:
+    """A model call made outside llm.py is not metered, and an unmetered call makes the cost
+    table wrong. This is the machine-checkable version of that rule."""
+    offenders = []
+    for path in SRC.glob("*.py"):
+        if path.name == "llm.py":
+            continue
+        tree = ast.parse(path.read_text())
+        for node in ast.walk(tree):
+            if isinstance(node, ast.ImportFrom) and node.module and "genai" in node.module:
+                offenders.append(f"{path.name}: from {node.module}")
+            if isinstance(node, ast.Import):
+                offenders.extend(f"{path.name}: import {a.name}"
+                                 for a in node.names if "genai" in a.name)
+    assert not offenders, f"only llm.py may import the Vertex SDK; found {offenders}"
+
+
+def test_no_module_constructs_its_own_client() -> None:
+    for path in SRC.glob("*.py"):
+        if path.name == "llm.py":
+            continue
+        assert "genai.Client" not in path.read_text(), f"{path.name} builds its own client"

@@ -16,7 +16,7 @@
     "acct_11",
     "acct_12"
   ],
-  "event_count": 1076,
+  "event_count": 1069,
   "incidents": [
     {
       "id": "INC-1",
@@ -113,6 +113,20 @@
   "silence_windows": {
     "acct_11": [
       12,
+      30
+    ]
+  },
+  "usage_suppression_windows": {
+    "acct_07": [
+      33,
+      41
+    ],
+    "acct_09": [
+      41,
+      49
+    ],
+    "acct_11": [
+      19,
       30
     ]
   },

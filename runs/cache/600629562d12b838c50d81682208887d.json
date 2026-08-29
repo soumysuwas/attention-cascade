@@ -1,0 +1,12 @@
+{
+  "text": "[\n  {\n    \"anomaly_id\": \"anom_crm_0011\",\n    \"plausible\": true,\n    \"reason\": \"Significant forecast reduction on key account.\",\n    \"business_hint\": \"Account revenue risk\"\n  },\n  {\n    \"anomaly_id\": \"anom_bil_0066\",\n    \"plausible\": true,\n    \"reason\": \"Substantial usage drop indicates churn risk.\",\n    \"business_hint\": \"Monitor usage decline\"\n  },\n  {\n    \"anomaly_id\": \"anom_bil_0067\",\n    \"plausible\": true,\n    \"reason\": \"Significant usage reduction on account.\",\n    \"business_hint\": \"Customer health warning\"\n  },\n  {\n    \"anomaly_id\": \"anom_bil_0064\",\n    \"plausible\": true,\n    \"reason\": \"Notable drop in billing volume.\",\n    \"business_hint\": \"Potential churn indicator\"\n  },\n  {\n    \"anomaly_id\": \"anom_bil_0068\",\n    \"plausible\": true,\n    \"reason\": \"Usage decline suggests lower engagement.\",\n    \"business_hint\": \"Customer usage drop\"\n  },\n  {\n    \"anomaly_id\": \"anom_crm_0015\",\n    \"plausible\": true,\n    \"reason\": \"Forecast cut could indicate pipeline risk.\",\n    \"business_hint\": \"Sales forecast adjustment\"\n  },\n  {\n    \"anomaly_id\": \"anom_crm_0002\",\n    \"plausible\": true,\n    \"reason\": \"Downward revision in deal forecast.\",\n    \"business_hint\": \"Pipeline reduction\"\n  },\n  {\n    \"anomaly_id\": \"anom_crm_0014\",\n    \"plausible\": true,\n    \"reason\": \"Forecast revision signals slower growth.\",\n    \"business_hint\": \"Revenue projection risk\"\n  }\n]",
+  "model": "gemini-3.5-flash-lite",
+  "tier": "tier1",
+  "input_tokens": 983,
+  "output_tokens": 454,
+  "thoughts_tokens": 0,
+  "cached_input_tokens": 0,
+  "latency_ms": 2197,
+  "cost_usd": 0.0014299,
+  "long_context": false
+}

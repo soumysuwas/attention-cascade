@@ -1,0 +1,12 @@
+{
+  "text": "[\n  {\n    \"title\": \"Ingest delivery slips lead to critical API outages\",\n    \"narrative\": \"The ingest engineering team missed delivery targets in late June due to blockers. Shortly after, acct_07 experienced severe ingest-api outages, leading to multiple Sev-1 support tickets, risking customer trust and potential churn.\",\n    \"entity_id\": \"acct_07\",\n    \"evidence\": [\n      {\n        \"event_id\": \"evt_00481\",\n        \"stream\": \"engineering\",\n        \"anomaly_id\": \"anom_eng_0024\"\n      },\n      {\n        \"event_id\": \"evt_00512\",\n        \"stream\": \"engineering\",\n        \"anomaly_id\": \"anom_eng_0025\"\n      },\n      {\n        \"event_id\": \"evt_00539\",\n        \"stream\": \"support\",\n        \"anomaly_id\": \"anom_sup_0057\"\n      },\n      {\n        \"event_id\": \"evt_00595\",\n        \"stream\": \"support\",\n        \"anomaly_id\": \"anom_sup_0056\"\n      }\n    ],\n    \"impact\": 0.85,\n    \"confidence\": 0.90\n  },\n  {\n    \"title\": \"Billing service regressions cause portal lockouts\",\n    \"narrative\": \"Reopened bugs in the billing-svc module during early to mid-July indicate unresolved regressions. This directly correlates with acct_02 experiencing permission denials and 401 errors in the billing portal days later, preventing account management.\",\n    \"entity_id\": \"acct_02\",\n    \"evidence\": [\n      {\n        \"event_id\": \"evt_00563\",\n        \"stream\": \"engineering\",\n        \"anomaly_id\": \"anom_eng_0032\"\n      },\n      {\n        \"event_id\": \"evt_00776\",\n        \"stream\": \"engineering\",\n        \"anomaly_id\": \"anom_eng_0034\"\n      },\n      {\n        \"event_id\": \"evt_00842\",\n        \"stream\": \"support\",\n        \"anomaly_id\": \"anom_sup_0037\"\n      },\n      {\n        \"event_id\": \"evt_00847\",\n        \"stream\": \"support\",\n        \"anomaly_id\": \"anom_sup_0038\"\n      }\n    ],\n    \"impact\": 0.75,\n    \"confidence\": 0.88\n  }\n]",
+  "model": "gemini-3.1-pro-preview",
+  "tier": "tier2",
+  "input_tokens": 4897,
+  "output_tokens": 624,
+  "thoughts_tokens": 1335,
+  "cached_input_tokens": 0,
+  "latency_ms": 14455,
+  "cost_usd": 0.033302,
+  "long_context": false
+}

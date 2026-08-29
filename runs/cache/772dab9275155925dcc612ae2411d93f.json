@@ -1,0 +1,12 @@
+{
+  "text": "[\n  {\n    \"anomaly_id\": \"anom_sup_0054\",\n    \"plausible\": true,\n    \"reason\": \"Support tickets on sso-auth could indicate enterprise churn risk.\",\n    \"business_hint\": \"Monitor account health\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0055\",\n    \"plausible\": true,\n    \"reason\": \"Multiple support issues on F-Atlas may impact expansion.\",\n    \"business_hint\": \"Check product adoption\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0056\",\n    \"plausible\": true,\n    \"reason\": \"Billing portal support issues risk customer satisfaction and renewal.\",\n    \"business_hint\": \"Review billing friction\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0057\",\n    \"plausible\": true,\n    \"reason\": \"Continued F-Atlas support volume indicates user friction.\",\n    \"business_hint\": \"Engage customer success\"\n  },\n  {\n    \"anomaly_id\": \"anom_crm_0007\",\n    \"plausible\": true,\n    \"reason\": \"Stalled deal stage combined with support tickets suggests pipeline risk.\",\n    \"business_hint\": \"Review sales pipeline\"\n  },\n  {\n    \"anomaly_id\": \"anom_crm_0016\",\n    \"plausible\": true,\n    \"reason\": \"Stalled deal stage indicates risk of lost momentum.\",\n    \"business_hint\": \"Accelerate sales outreach\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0062\",\n    \"plausible\": true,\n    \"reason\": \"Repeated support tickets on SSO auth signal onboarding friction.\",\n    \"business_hint\": \"Technical escalation needed\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0063\",\n    \"plausible\": true,\n    \"reason\": \"Sustained ticket volume indicates ongoing account friction.\",\n    \"business_hint\": \"Investigate recurring issues\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0064\",\n    \"plausible\": true,\n    \"reason\": \"Consecutive days of high ticket volume threaten account retention.\",\n    \"business_hint\": \"Account manager intervention\"\n  },\n  {\n    \"anomaly_id\": \"anom_sup_0040\",\n    \"plausible\": true,\n    \"reason\": \"Ingest API and F-Atlas issues affect core functionality.\",\n    \"business_hint\": \"Check platform stability\"\n  }\n]",
+  "model": "gemini-3.5-flash-lite",
+  "tier": "tier1",
+  "input_tokens": 1308,
+  "output_tokens": 616,
+  "thoughts_tokens": 0,
+  "cached_input_tokens": 0,
+  "latency_ms": 17877,
+  "cost_usd": 0.0019324000000000001,
+  "long_context": false
+}

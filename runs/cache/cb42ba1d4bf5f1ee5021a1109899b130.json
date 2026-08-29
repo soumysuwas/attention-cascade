@@ -1,0 +1,12 @@
+{
+  "text": "[\n  {\n    \"title\": \"Engineering Delays Block Customer Migration\",\n    \"narrative\": \"Customer acct_03 is repeatedly blocked and escalating for ETAs on the F-Atlas rollout. This directly correlates with the platform engineering team missing their sprint commitments, threatening the customer's migration timeline and overall satisfaction.\",\n    \"entity_id\": \"acct_03\",\n    \"evidence\": [\n      {\n        \"event_id\": \"evt_00453\",\n        \"stream\": \"support\",\n        \"anomaly_id\": \"anom_sup_0040\"\n      },\n      {\n        \"event_id\": \"evt_00502\",\n        \"stream\": \"support\",\n        \"anomaly_id\": \"anom_sup_0042\"\n      },\n      {\n        \"event_id\": \"evt_00554\",\n        \"stream\": \"engineering\",\n        \"anomaly_id\": \"anom_eng_0026\"\n      }\n    ],\n    \"impact\": 0.8,\n    \"confidence\": 0.9\n  },\n  {\n    \"title\": \"Billing Migration Precedes Deal Closure\",\n    \"narrative\": \"Account 05 was migrated from a legacy flat plan to a usage-metered plan just days before their deal was marked closed-won. This indicates the billing model update was a necessary condition for finalizing the contract renewal or expansion.\",\n    \"entity_id\": \"acct_05\",\n    \"evidence\": [\n      {\n        \"event_id\": \"evt_00234\",\n        \"stream\": \"billing\",\n        \"anomaly_id\": \"anom_bil_0065\"\n      },\n      {\n        \"event_id\": \"evt_00332\",\n        \"stream\": \"crm\",\n        \"anomaly_id\": \"anom_crm_0007\"\n      }\n    ],\n    \"impact\": 0.7,\n    \"confidence\": 0.85\n  }\n]",
+  "model": "gemini-3.1-pro-preview",
+  "tier": "tier2",
+  "input_tokens": 4823,
+  "output_tokens": 473,
+  "thoughts_tokens": 804,
+  "cached_input_tokens": 0,
+  "latency_ms": 10733,
+  "cost_usd": 0.02497,
+  "long_context": false
+}
