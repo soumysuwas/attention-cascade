@@ -1,0 +1,12 @@
+{
+  "text": "[\n  {\"id\": \"evt_00018\", \"text\": \"Customer is seeing missing data in export across several scheduled reports using the integrations pipeline, needs investigation.\"},\n  {\"id\": \"evt_00517\", \"text\": \"Monthly usage snapshot recorded for api_calls totaling 38,823.5 units for the billing cycle.\"},\n  {\"id\": \"evt_00970\", \"text\": \"Platform team opened a new bug tracking ticket for kernel panic during high concurrency loads.\"},\n  {\"id\": \"evt_01004\", \"text\": \"Forecast updated to $41,188.00 after deal size was adjusted down by roughly 4.8 percent.\"},\n  {\"id\": \"evt_01005\", \"text\": \"Report renders blank when pulled through the ingest-api component, affecting executive dashboards today.\"},\n  {\"id\": \"evt_01009\", \"text\": \"Clients experiencing slow response times on webhook integrations since the morning deployment went live.\"},\n  {\"id\": \"evt_01042\", \"text\": \"Pipeline forecast increased by 12.9 percent to $129,508.00 following strong technical validation calls.\"},\n  {\"id\": \"evt_01053\", \"text\": \"Q3 forecast revised upward by 14.7 percent to $95,730.00 as expansion talks progressed.\"},\n  {\"id\": \"evt_01056\", \"text\": \"Users reporting they cannot log in via the ingest-api auth gateway after password reset.\"}\n]",
+  "model": "gemini-3.5-flash-lite",
+  "tier": "enrich",
+  "input_tokens": 1090,
+  "output_tokens": 357,
+  "thoughts_tokens": 0,
+  "cached_input_tokens": 0,
+  "latency_ms": 2233,
+  "cost_usd": 0.0012195,
+  "long_context": false
+}

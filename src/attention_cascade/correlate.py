@@ -48,7 +48,7 @@ Propose at most 12 hypotheses. Prefer fewer, better-evidenced ones."""
 def _context(bb: Blackboard, anomalies: list[Anomaly]) -> dict:
     """Anomalies grouped BY ACCOUNT, each with up to 5 representative raw events.
 
-    SPEC section 7 asks for "all candidates plus per-account context", and the grouping is
+    DESIGN section 7 asks for "all candidates plus per-account context", and the grouping is
     load-bearing rather than cosmetic. A flat list ordered by score scatters one account's CRM,
     support and billing anomalies across seventy-odd entries, so the cross-system chain the model
     is being asked to find is not visible anywhere in its input. Grouping by account puts each
@@ -177,7 +177,7 @@ async def correlate(
 
 
 def _chunk(bb: Blackboard, selected: list[Anomaly]) -> list[list[Anomaly]]:
-    """One call if it fits, two at most (SPEC section 7). If two, split BY ACCOUNT.
+    """One call if it fits, two at most (DESIGN section 7). If two, split BY ACCOUNT.
 
     Splitting by rank was a real defect: anomalies are ordered by score, so one account's CRM,
     support and billing anomalies scatter across both calls and the cross-system chain is severed

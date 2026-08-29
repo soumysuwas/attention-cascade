@@ -1,9 +1,8 @@
-# DECISIONS.md
+# Decisions
 
-Architectural decisions and their rejected alternatives. This file is the raw material for the
-judging answer to "what was the hardest technical decision you made and how did you solve it."
+Architectural decisions and the alternatives they rejected, in the order they were made.
 
-Every entry must name a **cost**. A decision with no cost is a preference.
+Every entry names a **cost**. A decision with no cost is a preference.
 
 ---
 
@@ -46,7 +45,6 @@ Every entry must name a **cost**. A decision with no cost is a preference.
 - **Cost of this choice:** genuine single-system emergencies are structurally invisible to this
   design. That is a real limitation and should be stated out loud, not hidden.
 
-<!-- Agent: append D-5 onward below this line -->
 
 ### D-5: Verify model availability with a real call, not `models.list()`
 - **Context:** `ac verify --list-models` has to prove the ids in `config.py` are usable before any
@@ -81,17 +79,17 @@ Every entry must name a **cost**. A decision with no cost is a preference.
   headline cost comparison — does not exist in this project on any endpoint. `gemini-3.1-pro-preview`
   does, and answers correctly with thinking enabled.
 - **Chose:** fail `ac verify --list-models` loudly with the callable/not-callable table and the
-  catalogue, and raise the substitution as the one blocking question of Checkpoint 1.
+  catalogue, and stop rather than choose a substitute unilaterally.
 - **Rejected:** silently pointing `TIER2_MODEL` and `BASELINE_MODEL` at `gemini-3.1-pro-preview`
-  and carrying on, which would have kept the checkpoint on schedule.
+  and carrying on, which would have kept things moving.
 - **Because:** `PRICING` is keyed by model id and is marked do-not-edit without approval. A
   substituted id would either inherit `gemini-3.1-pro`'s rates without evidence they apply to the
   preview endpoint, or need a new pricing row I am not authorised to invent. Either way the
   headline cost number would rest on an unverified rate, which is exactly the failure mode the
   pricing comment in `config.py` warns about.
-- **Cost of this choice:** Checkpoint 1 ships with one box unmet and Checkpoints 2 and 3 cannot
-  start until a human answers. Everything not downstream of Tier 2 was completed anyway, so the
-  blocked surface is one decision, not one day.
+- **Cost of this choice:** the whole comparison stalls until the model question is settled.
+  Everything not downstream of Tier 2 was built anyway, so the blocked surface was one decision
+  rather than the whole project.
 
 ### D-8: Add a repair pass to enrichment rather than accept 1089/1090
 - **Context:** the first full enrichment run rewrote 1089 of 1090 events. One support ticket kept
@@ -109,17 +107,17 @@ Every entry must name a **cost**. A decision with no cost is a preference.
 
 ### D-9: The CLI is a pipeline module and stays blind to ground truth
 - **Context:** `ac generate` naturally wants to print how many ground-truth rows it planted, and
-  `ac review` needs incident counts and incident chains for the Checkpoint 1 packet.
+  reporting needs incident counts and incident chains.
 - **Chose:** keep `cli.py` on the blind side of the quarantine. It calls into `report.py`, which is
   the one module allowed to import `groundtruth.py`. The generate command no longer prints a
   planted-row count at all.
 - **Rejected:** adding `cli.py` to the `ALLOWED` set in `tests/test_no_groundtruth_leak.py`, which
   was the one-line fix when that test failed.
-- **Because:** the quarantine is only worth anything if the allow-list is short enough that a judge
-  can read it and believe it. Widening the list to make a test pass is how a quarantine dies, and
+- **Because:** the quarantine is only worth anything if the allow-list is short enough to read
+  and believe. Widening the list to make a test pass is how a quarantine dies, and
   the CLI is the module most likely to grow a run command later that would then sit inside the
   permitted set.
-- **Cost of this choice:** one extra indirection — the packet builder lives in `report.py` rather
+- **Cost of this choice:** one extra indirection — the reporting code lives in `report.py` rather
   than next to the command that invokes it, so `ac review` is not readable end to end in one file.
 
 ### D-10: Score recall from the ground-truth table, not from the seed manifest
@@ -136,11 +134,11 @@ Every entry must name a **cost**. A decision with no cost is a preference.
 - **Cost of this choice:** a named exception in the test suite that has to be explained out loud,
   and a manifest that does not literally match the table for one of five incidents.
 
-### D-11: Accept `gemini-3.1-pro-preview` at GA 3.1 Pro rates (human-approved)
+### D-11: Accept `gemini-3.1-pro-preview` at GA 3.1 Pro rates
 - **Context:** D-7 blocked on a model that does not exist in this project.
 - **Chose:** `TIER1_MODEL=gemini-3.5-flash-lite` ($0.30/$2.50), `TIER2_MODEL` and `BASELINE_MODEL`
-  `=gemini-3.1-pro-preview` ($2.00/$12.00, cliff $4/$18 above 200K). Both `PRICING` rows added
-  under explicit human approval, with the sourcing recorded in a comment beside them.
+  `=gemini-3.1-pro-preview` ($2.00/$12.00, cliff $4/$18 above 200K). Both `PRICING` rows carry the
+  rate sourcing in a comment beside them.
 - **Rejected:** `gemini-3.7-flash` as Tier 2, which is callable but on introductory pricing.
 - **Because:** a headline cost number must not rest on a promotional rate that doubles in December.
 - **Cost of this choice:** the Tier1:Tier2 input ratio narrows from 8x to 6.7x, so the per-token
@@ -165,8 +163,8 @@ Every entry must name a **cost**. A decision with no cost is a preference.
   structured field remains.
 
 ### D-13: `ac check-linkage`, and treating undiscoverability as a build error
-- **Context:** the enrichment defect was found by a human reading sample output. That does not scale
-  and it does not survive a 2am generator change.
+- **Context:** the enrichment defect was found by reading sample output by eye. That does not
+  scale and it does not survive a 2am generator change.
 - **Chose:** a command that builds a stream graph per incident, where an edge exists if two streams
   share an `entity_id` or any structured payload value, and fails if any incident's graph is
   disconnected. `payload["text"]` is excluded from join keys on purpose.
@@ -184,7 +182,7 @@ Every entry must name a **cost**. A decision with no cost is a preference.
   structure and the confidence floor never executed against anything adversarial.
 - **Chose:** plant NM-5 as a support spike and a billing dip on one account in one window with no
   causal link, and an innocent cause stated in the data.
-- **Rejected:** leaving the floor untested and reporting a gate that was really one if-statement.
+- **Rejected:** leaving the floor untested, and shipping a gate that was really one if-statement.
 - **Because:** a rule that never fires is not evidence of anything. Whether the floor catches NM-5
   is now a measured outcome, and either result is reportable.
 - **Cost of this choice:** the false-escalation count can now be non-zero, which makes the headline
@@ -258,20 +256,20 @@ Every entry must name a **cost**. A decision with no cost is a preference.
   nothing when it does fire.
 
 ### D-20: Report Tier 1's permissiveness rather than tune it away
-- **Context:** Tier 1 marks 75 of 75 anomalies plausible. The spec expected 12-20 candidates.
+- **Context:** Tier 1 marks 75 of 75 anomalies plausible. The design expected 12-20 candidates.
 - **Chose:** leave the verbatim prompt alone and report the result, including in the collapse line
   where the flat segment is plainly visible.
 - **Rejected:** rewriting the prompt to force selectivity, or thresholding on a model-produced
   score.
 - **Because:** the prompt says "Be permissive at this stage", and the model is obeying it. Tuning
-  until the number matched the spec's expectation would be fitting the measurement to the
+  until the number matched that expectation would be fitting the measurement to the
   prediction. All volume reduction is therefore happening at Tier 0, which is a finding about
   where the cheap win actually lives.
 - **Cost of this choice:** Tier 1 currently costs $0.0145 and removes nothing, so on this dataset
   it is pure overhead. Its value would appear at a noise density where Tier 0 emits far more.
 
-### D-21: The review packet replays into a scratch database
-- **Context:** building the packet re-ran the cascade against the finished run's own database,
+### D-21: Reporting replays into a scratch database
+- **Context:** building the report re-ran the cascade against the finished run's own database,
   appending a second set of `llm_calls` rows. Table C reported $0.1675, 16 Tier 1 calls and 2 Tier
   2 calls for a run that was really $0.0838, 8 calls and 1 call.
 - **Chose:** copy the events into `runs/_packet/`, replay there from cache, and read the cost
@@ -281,6 +279,6 @@ Every entry must name a **cost**. A decision with no cost is a preference.
 - **Because:** the measured run is the evidence. Anything that writes to it during reporting can
   corrupt the number being reported, and a cost table that doubles under observation is worse than
   no cost table.
-- **Cost of this choice:** the packet's figures come from one database and its hypotheses from
+- **Cost of this choice:** the reported figures come from one database and the hypotheses from
   another. They agree only because replay is deterministic from the cache, which is a property
   worth stating rather than assuming.

@@ -447,7 +447,7 @@ def found(signals: list, hypotheses: list, db: Path | None = None) -> set[str]:
     """An incident is FOUND if some escalated signal's DEDUPLICATED evidence contains events
     tagged with that incident_id from >= 2 distinct streams.
 
-    This is the exact definition in SPEC section 10 and in the README. Note it is per-signal:
+    This is the exact definition in DESIGN section 10 and in the README. Note it is per-signal:
     two signals each contributing one stream do not add up to a find.
     """
     from .gate import dedupe_evidence  # noqa: PLC0415

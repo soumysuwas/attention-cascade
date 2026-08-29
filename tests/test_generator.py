@@ -48,7 +48,7 @@ def test_exactly_five_incidents_and_five_near_misses(db: Path) -> None:
 # INC-5's support hop is a SILENCE. An absence of tickets has no events of its own, so there is
 # nothing for the ground_truth table to tag with a support row. The chain still reaches two
 # systems (crm contact_departed + billing usage decay), which is what the gate actually needs.
-# See SPEC.md section 4. This is the only incident whose declared streams and tagged streams differ,
+# See DESIGN.md section 4. This is the only incident whose declared and tagged streams differ,
 # and the difference is stated here rather than hidden by a weaker assertion.
 SILENCE_HOP = {"INC-5": {"support"}}
 

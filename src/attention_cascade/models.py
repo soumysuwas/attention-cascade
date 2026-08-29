@@ -1,7 +1,7 @@
 """Typed objects that cross a tier boundary.
 
 Does: define Event, Anomaly, Candidate, Hypothesis, Signal and the gate result types.
-Does not: contain any incident/ground-truth field - that quarantine is deliberate (see CLAUDE.md).
+Does not: contain any incident/ground-truth field - that quarantine is deliberate (see DESIGN.md).
 Exists because: every tier writes to a shared blackboard, so the shapes must be agreed in one place.
 """
 

@@ -24,7 +24,7 @@ PRAGMA journal_mode=WAL;
 PRAGMA busy_timeout=5000;
 
 -- NOTE: deliberately no incident_id column here. Ground truth lives in its own table
--- and is readable only by report.py and tests. See CLAUDE.md rule 2.
+-- and is readable only by report.py and tests. See DESIGN.md section 11.
 CREATE TABLE IF NOT EXISTS events (
     id TEXT PRIMARY KEY,
     ts TEXT NOT NULL,

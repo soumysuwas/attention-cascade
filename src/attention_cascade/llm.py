@@ -4,7 +4,7 @@ Does: call Gemini on Vertex, record real token usage (including thinking tokens)
 blackboard, cache every response to disk, and replay from cache with no network.
 Does not: decide anything. It has no opinion about tiers, escalation, or importance.
 Exists because: the deliverable is a measured cost table, and a cost table built on estimated
-token counts is worthless. Rule 3 in CLAUDE.md lives here.
+token counts is worthless. Rule 3 in DESIGN.md lives here.
 """
 
 from __future__ import annotations

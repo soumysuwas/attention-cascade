@@ -1,6 +1,6 @@
 """The gate holds escalation authority, so it gets the heaviest test file in the project.
 
-Covers every rule in SPEC section 8 and, more importantly, the properties a judge will probe:
+Covers every rule in DESIGN section 8 and, more importantly, the properties a judge will probe:
 that duplicate evidence cannot fake a second source, that ranking is a total order with no
 randomness, that the cap is a live budget rather than a truncation, and that every refusal
 carries a machine-readable reason.
